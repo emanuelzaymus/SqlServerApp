@@ -14,7 +14,7 @@ namespace SqlServerApp
     {
         private readonly MainController _controller = new MainController();
 
-        private readonly BindingSource bindingSource = new BindingSource(new Container());
+        private readonly BindingSource _bindingSource = new BindingSource(new Container());
 
         public App()
         {
@@ -23,7 +23,9 @@ namespace SqlServerApp
             tablesListBox.DataSource = _controller.GetTableNames();
             tablesListBox.SelectedValueChanged += SelectedTableChanged;
 
-            mainDataGridView.DataSource = bindingSource;
+            mainDataGridView.DataSource = _bindingSource;
+
+            bindingNavigator.BindingSource = _bindingSource;
         }
 
         private void SelectedTableChanged(object sender, EventArgs e) => ReloadTable();
@@ -31,13 +33,13 @@ namespace SqlServerApp
         private void ReloadTable()
         {
             var tableName = (string)tablesListBox.SelectedItem;
-            bindingSource.DataSource = _controller.GetTable(tableName);
-            bindingSource.DataMember = tableName;
+            _bindingSource.DataSource = _controller.GetTable(tableName);
+            _bindingSource.DataMember = tableName;
         }
 
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
-            int rowsAffected = _controller.SaveChanges((DataSet)bindingSource.DataSource);
+            int rowsAffected = _controller.SaveChanges((DataSet)_bindingSource.DataSource);
             SetMessage("Rows affected: " + rowsAffected);
             ReloadTable();
         }
