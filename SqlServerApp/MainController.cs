@@ -10,16 +10,49 @@ namespace SqlServerApp
 {
     class MainController : IDisposable
     {
-        private const string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly SqlConnection _connection = new SqlConnection(ConnectionString);
+        private readonly string _connectionString;
+
+        private readonly SqlConnection _connection;
+
         private readonly SqlCommand _command;
         private readonly SqlDataAdapter _dataAdapter;
 
-        public MainController()
+        //public string ConnectionString
+        //{
+        //    get => _connectionString;
+        //    set
+        //    {
+        //        _connectionString = value;
+
+        //        _connection = new SqlConnection(_connectionString);
+        //        _connection.chan
+        //        _command = _connection.
+        //    }
+        //}//= "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        public string CurrentDatabaseName => _connection.Database;
+
+        public MainController(string connectionString)
         {
+            _connectionString = connectionString;
+
+            _connection = new SqlConnection(connectionString);
             _connection.Open();
+
             _command = _connection.CreateCommand();
             _dataAdapter = new SqlDataAdapter(_command);
+        }
+
+        internal IList<string> GetDatabaseNames()
+        {
+            _command.CommandText = "SELECT name FROM sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb', 'AzureStorageEmulatorDb510')";
+
+            return _command.ExecuteReader().GetAll().Select(r => (string)r["name"]).ToList();
+        }
+
+        internal void ChangeDatabase(string databaseName)
+        {
+            _connection.ChangeDatabase(databaseName);
         }
 
         internal IList<string> GetTableNames()

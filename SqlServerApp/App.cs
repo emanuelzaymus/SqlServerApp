@@ -12,7 +12,7 @@ namespace SqlServerApp
 {
     public partial class App : Form
     {
-        private readonly MainController _controller = new MainController();
+        private readonly MainController _controller;
 
         private readonly BindingSource _bindingSource = new BindingSource(new Container());
 
@@ -20,12 +20,32 @@ namespace SqlServerApp
         {
             InitializeComponent();
 
+            _controller = new MainController("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            databasesListBox.DataSource = _controller.GetDatabaseNames();
+            databasesListBox.SelectedValueChanged += SelectedDatabaseChanged;
+            databasesListBox.SelectedItem = _controller.CurrentDatabaseName;
+
             tablesListBox.DataSource = _controller.GetTableNames();
             tablesListBox.SelectedValueChanged += SelectedTableChanged;
 
             mainDataGridView.DataSource = _bindingSource;
-
             bindingNavigator.BindingSource = _bindingSource;
+        }
+
+        private void SelectedDatabaseChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var dbName = databasesListBox.SelectedItem.ToString();
+                _controller.ChangeDatabase(dbName);
+
+                tablesListBox.DataSource = _controller.GetTableNames();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex.Message);
+            }
         }
 
         private void SelectedTableChanged(object sender, EventArgs e)
@@ -38,7 +58,7 @@ namespace SqlServerApp
         {
             try
             {
-                var tableName = (string)tablesListBox.SelectedItem;
+                var tableName = tablesListBox.SelectedItem.ToString();
                 var dataSet = _controller.GetTable(tableName, filterTextBox.Text);
                 _bindingSource.DataSource = dataSet;
                 _bindingSource.DataMember = tableName;
