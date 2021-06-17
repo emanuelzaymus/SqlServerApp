@@ -26,7 +26,9 @@ namespace SqlServerApp
 
         internal IList<string> GetDatabaseNames()
         {
-            _command.CommandText = "SELECT name FROM sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb', 'AzureStorageEmulatorDb510')";
+            _command.CommandText = "SELECT name FROM sys.databases " +
+                "WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb') " +
+                "AND name NOT LIKE 'AzureStorageEmulatorDb%'";
 
             return _command.ExecuteReader().GetAll().Select(r => (string)r["name"]).ToList();
         }
