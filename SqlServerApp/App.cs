@@ -15,21 +15,7 @@ namespace SqlServerApp
         {
             InitializeComponent();
 
-            bool success = false;
-            do
-            {
-                try
-                {
-                    var connectionString = ConnectionStringProvider.Provide();
-                    _controller = new MainController(connectionString);
-                    success = true;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Invalid Connection String.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-            } while (!success);
+            _controller = CreateMainController();
 
             databasesListBox.DataSource = _controller.GetDatabaseNames();
             databasesListBox.SelectedValueChanged += SelectedDatabaseChanged;
@@ -40,6 +26,22 @@ namespace SqlServerApp
 
             mainDataGridView.DataSource = _bindingSource;
             bindingNavigator.BindingSource = _bindingSource;
+        }
+
+        private MainController CreateMainController()
+        {
+            while (true)
+            {
+                try
+                {
+                    var connectionString = ConnectionStringProvider.Provide();
+                    return new MainController(connectionString);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Invalid Connection String." + e.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         private void SelectedDatabaseChanged(object sender, EventArgs e)
