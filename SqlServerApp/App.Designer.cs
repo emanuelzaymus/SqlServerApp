@@ -50,11 +50,11 @@ namespace SqlServerApp
             this.databasesListBox = new System.Windows.Forms.ListBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.dataTabPage = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.filterTextBox = new System.Windows.Forms.TextBox();
             this.structureTabPage = new System.Windows.Forms.TabPage();
             this.reportTabPage = new System.Windows.Forms.TabPage();
-            this.filterTextBox = new System.Windows.Forms.TextBox();
-            this.filterButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
@@ -248,31 +248,14 @@ namespace SqlServerApp
             this.dataTabPage.Text = "Data";
             this.dataTabPage.UseVisualStyleBackColor = true;
             // 
-            // structureTabPage
+            // label1
             // 
-            this.structureTabPage.Location = new System.Drawing.Point(4, 22);
-            this.structureTabPage.Name = "structureTabPage";
-            this.structureTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.structureTabPage.Size = new System.Drawing.Size(748, 532);
-            this.structureTabPage.TabIndex = 1;
-            this.structureTabPage.Text = "Stucture";
-            this.structureTabPage.UseVisualStyleBackColor = true;
-            // 
-            // reportTabPage
-            // 
-            this.reportTabPage.Location = new System.Drawing.Point(4, 22);
-            this.reportTabPage.Name = "reportTabPage";
-            this.reportTabPage.Size = new System.Drawing.Size(748, 532);
-            this.reportTabPage.TabIndex = 2;
-            this.reportTabPage.Text = "Report";
-            this.reportTabPage.UseVisualStyleBackColor = true;
-            // 
-            // filterTextBox
-            // 
-            this.filterTextBox.Location = new System.Drawing.Point(93, 520);
-            this.filterTextBox.Name = "filterTextBox";
-            this.filterTextBox.Size = new System.Drawing.Size(537, 20);
-            this.filterTextBox.TabIndex = 5;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 523);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Filter Conditions:";
             // 
             // filterButton
             // 
@@ -284,14 +267,31 @@ namespace SqlServerApp
             this.filterButton.UseVisualStyleBackColor = true;
             this.filterButton.Click += new System.EventHandler(this.FilterButton_Click);
             // 
-            // label1
+            // filterTextBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 523);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Filter Conditions:";
+            this.filterTextBox.Location = new System.Drawing.Point(93, 520);
+            this.filterTextBox.Name = "filterTextBox";
+            this.filterTextBox.Size = new System.Drawing.Size(537, 20);
+            this.filterTextBox.TabIndex = 5;
+            // 
+            // structureTabPage
+            // 
+            this.structureTabPage.Location = new System.Drawing.Point(4, 22);
+            this.structureTabPage.Name = "structureTabPage";
+            this.structureTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.structureTabPage.Size = new System.Drawing.Size(733, 545);
+            this.structureTabPage.TabIndex = 1;
+            this.structureTabPage.Text = "Stucture";
+            this.structureTabPage.UseVisualStyleBackColor = true;
+            // 
+            // reportTabPage
+            // 
+            this.reportTabPage.Location = new System.Drawing.Point(4, 22);
+            this.reportTabPage.Name = "reportTabPage";
+            this.reportTabPage.Size = new System.Drawing.Size(733, 545);
+            this.reportTabPage.TabIndex = 2;
+            this.reportTabPage.Text = "Report";
+            this.reportTabPage.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -313,6 +313,7 @@ namespace SqlServerApp
             this.Controls.Add(this.messageLabel);
             this.Controls.Add(this.tablesListBox);
             this.Name = "App";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sql Server App";
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();

@@ -3,39 +3,20 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SqlServerApp
 {
     class MainController : IDisposable
     {
-        private readonly string _connectionString;
-
         private readonly SqlConnection _connection;
 
         private readonly SqlCommand _command;
         private readonly SqlDataAdapter _dataAdapter;
 
-        //public string ConnectionString
-        //{
-        //    get => _connectionString;
-        //    set
-        //    {
-        //        _connectionString = value;
-
-        //        _connection = new SqlConnection(_connectionString);
-        //        _connection.chan
-        //        _command = _connection.
-        //    }
-        //}//= "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
         public string CurrentDatabaseName => _connection.Database;
 
         public MainController(string connectionString)
         {
-            _connectionString = connectionString;
-
             _connection = new SqlConnection(connectionString);
             _connection.Open();
 
@@ -68,7 +49,6 @@ namespace SqlServerApp
 
             _command.CommandText = $"SELECT * FROM [{tableName}] " +
                 $"{(string.IsNullOrWhiteSpace(filterConditions) ? "" : "WHERE " + filterConditions)}";
-            //var dataAdapter = new SqlDataAdapter(_command);
 
             _dataAdapter.Fill(ret, tableName);
 

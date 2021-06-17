@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SqlServerApp
@@ -20,7 +15,21 @@ namespace SqlServerApp
         {
             InitializeComponent();
 
-            _controller = new MainController("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            bool success = false;
+            do
+            {
+                try
+                {
+                    var connectionString = ConnectionStringProvider.Provide();
+                    _controller = new MainController(connectionString);
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Invalid Connection String.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            } while (!success);
 
             databasesListBox.DataSource = _controller.GetDatabaseNames();
             databasesListBox.SelectedValueChanged += SelectedDatabaseChanged;
@@ -81,6 +90,9 @@ namespace SqlServerApp
             ReloadTable();
         }
 
-        private void SetMessage(string msg) => messageLabel.Text = msg;
+        private void SetMessage(string msg)
+        {
+            messageLabel.Text = msg;
+        }
     }
 }
