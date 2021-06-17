@@ -56,6 +56,12 @@ namespace SqlServerApp
             this.structureTabPage = new System.Windows.Forms.TabPage();
             this.reportTabPage = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.createDbButton = new System.Windows.Forms.Button();
+            this.dropDbButton = new System.Windows.Forms.Button();
+            this.createTableButton = new System.Windows.Forms.Button();
+            this.dropTableButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -68,7 +74,7 @@ namespace SqlServerApp
             this.tablesListBox.FormattingEnabled = true;
             this.tablesListBox.Location = new System.Drawing.Point(176, 33);
             this.tablesListBox.Name = "tablesListBox";
-            this.tablesListBox.Size = new System.Drawing.Size(160, 550);
+            this.tablesListBox.Size = new System.Drawing.Size(160, 485);
             this.tablesListBox.TabIndex = 0;
             // 
             // mainDataGridView
@@ -180,6 +186,7 @@ namespace SqlServerApp
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -218,7 +225,7 @@ namespace SqlServerApp
             this.databasesListBox.FormattingEnabled = true;
             this.databasesListBox.Location = new System.Drawing.Point(10, 33);
             this.databasesListBox.Name = "databasesListBox";
-            this.databasesListBox.Size = new System.Drawing.Size(160, 550);
+            this.databasesListBox.Size = new System.Drawing.Size(160, 485);
             this.databasesListBox.TabIndex = 6;
             // 
             // tabControl
@@ -245,7 +252,7 @@ namespace SqlServerApp
             this.dataTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.dataTabPage.Size = new System.Drawing.Size(733, 545);
             this.dataTabPage.TabIndex = 0;
-            this.dataTabPage.Text = "Data";
+            this.dataTabPage.Text = "Table Data";
             this.dataTabPage.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -281,7 +288,7 @@ namespace SqlServerApp
             this.structureTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.structureTabPage.Size = new System.Drawing.Size(733, 545);
             this.structureTabPage.TabIndex = 1;
-            this.structureTabPage.Text = "Stucture";
+            this.structureTabPage.Text = "Table Stucture";
             this.structureTabPage.UseVisualStyleBackColor = true;
             // 
             // reportTabPage
@@ -290,7 +297,7 @@ namespace SqlServerApp
             this.reportTabPage.Name = "reportTabPage";
             this.reportTabPage.Size = new System.Drawing.Size(733, 545);
             this.reportTabPage.TabIndex = 2;
-            this.reportTabPage.Text = "Report";
+            this.reportTabPage.Text = "Table Report";
             this.reportTabPage.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -302,11 +309,72 @@ namespace SqlServerApp
             this.label2.TabIndex = 8;
             this.label2.Text = "Message:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Databases";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(176, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Tables";
+            // 
+            // createDbButton
+            // 
+            this.createDbButton.Location = new System.Drawing.Point(10, 531);
+            this.createDbButton.Name = "createDbButton";
+            this.createDbButton.Size = new System.Drawing.Size(160, 23);
+            this.createDbButton.TabIndex = 12;
+            this.createDbButton.Text = "Create Database";
+            this.createDbButton.UseVisualStyleBackColor = true;
+            // 
+            // dropDbButton
+            // 
+            this.dropDbButton.Location = new System.Drawing.Point(10, 560);
+            this.dropDbButton.Name = "dropDbButton";
+            this.dropDbButton.Size = new System.Drawing.Size(160, 23);
+            this.dropDbButton.TabIndex = 13;
+            this.dropDbButton.Text = "Drop Database";
+            this.dropDbButton.UseVisualStyleBackColor = true;
+            // 
+            // createTableButton
+            // 
+            this.createTableButton.Location = new System.Drawing.Point(176, 531);
+            this.createTableButton.Name = "createTableButton";
+            this.createTableButton.Size = new System.Drawing.Size(160, 23);
+            this.createTableButton.TabIndex = 14;
+            this.createTableButton.Text = "Create Table";
+            this.createTableButton.UseVisualStyleBackColor = true;
+            this.createTableButton.Click += new System.EventHandler(this.CreateTableButton_Click);
+            // 
+            // dropTableButton
+            // 
+            this.dropTableButton.Location = new System.Drawing.Point(176, 560);
+            this.dropTableButton.Name = "dropTableButton";
+            this.dropTableButton.Size = new System.Drawing.Size(160, 23);
+            this.dropTableButton.TabIndex = 15;
+            this.dropTableButton.Text = "Drop Table";
+            this.dropTableButton.UseVisualStyleBackColor = true;
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 611);
+            this.Controls.Add(this.createTableButton);
+            this.Controls.Add(this.dropDbButton);
+            this.Controls.Add(this.dropTableButton);
+            this.Controls.Add(this.createDbButton);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.databasesListBox);
@@ -354,6 +422,12 @@ namespace SqlServerApp
         private System.Windows.Forms.TextBox filterTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button createDbButton;
+        private System.Windows.Forms.Button dropDbButton;
+        private System.Windows.Forms.Button createTableButton;
+        private System.Windows.Forms.Button dropTableButton;
     }
 }
 

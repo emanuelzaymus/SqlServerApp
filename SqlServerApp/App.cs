@@ -16,12 +16,10 @@ namespace SqlServerApp
             InitializeComponent();
 
             _controller = CreateMainController();
-
-            databasesListBox.DataSource = _controller.GetDatabaseNames();
+            RefreshDatabases();
             databasesListBox.SelectedValueChanged += SelectedDatabaseChanged;
             databasesListBox.SelectedItem = _controller.CurrentDatabaseName;
-
-            tablesListBox.DataSource = _controller.GetTableNames();
+            RefreshTables();
             tablesListBox.SelectedValueChanged += SelectedTableChanged;
 
             mainDataGridView.DataSource = _bindingSource;
@@ -44,6 +42,10 @@ namespace SqlServerApp
             }
         }
 
+        private void RefreshDatabases() => databasesListBox.DataSource = _controller.GetDatabaseNames();
+
+        private void RefreshTables() => tablesListBox.DataSource = _controller.GetTableNames();
+
         private void SelectedDatabaseChanged(object sender, EventArgs e)
         {
             try
@@ -63,6 +65,13 @@ namespace SqlServerApp
         {
             filterTextBox.Text = default;
             ReloadTable();
+        }
+
+        private void CreateTableButton_Click(object sender, EventArgs e)
+        {
+            var rowsAffected = _controller.CreateNewTable();
+            SetMessage("Rows affected: " + rowsAffected);
+            RefreshTables();
         }
 
         private void ReloadTable()
@@ -96,5 +105,6 @@ namespace SqlServerApp
         {
             messageLabel.Text = msg;
         }
+
     }
 }
