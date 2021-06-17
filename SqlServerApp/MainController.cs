@@ -29,11 +29,12 @@ namespace SqlServerApp
             return _command.ExecuteReader().GetAll().Select(r => (string)r["TABLE_NAME"]).ToList();
         }
 
-        internal DataSet GetTable(string tableName)
+        internal DataSet GetTable(string tableName, string filterConditions)
         {
             var ret = new DataSet();
 
-            _command.CommandText = $"SELECT * FROM [{tableName}]";
+            _command.CommandText = $"SELECT * FROM [{tableName}] " +
+                $"{(string.IsNullOrWhiteSpace(filterConditions) ? "" : "WHERE " + filterConditions)}";
             //var dataAdapter = new SqlDataAdapter(_command);
 
             _dataAdapter.Fill(ret, tableName);

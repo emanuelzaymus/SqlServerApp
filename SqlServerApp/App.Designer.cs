@@ -52,6 +52,10 @@ namespace SqlServerApp
             this.dataTabPage = new System.Windows.Forms.TabPage();
             this.structureTabPage = new System.Windows.Forms.TabPage();
             this.reportTabPage = new System.Windows.Forms.TabPage();
+            this.filterTextBox = new System.Windows.Forms.TextBox();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -64,7 +68,7 @@ namespace SqlServerApp
             this.tablesListBox.FormattingEnabled = true;
             this.tablesListBox.Location = new System.Drawing.Point(176, 33);
             this.tablesListBox.Name = "tablesListBox";
-            this.tablesListBox.Size = new System.Drawing.Size(160, 537);
+            this.tablesListBox.Size = new System.Drawing.Size(160, 550);
             this.tablesListBox.TabIndex = 0;
             // 
             // mainDataGridView
@@ -73,16 +77,17 @@ namespace SqlServerApp
             this.mainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mainDataGridView.Location = new System.Drawing.Point(3, 31);
             this.mainDataGridView.Name = "mainDataGridView";
-            this.mainDataGridView.Size = new System.Drawing.Size(727, 498);
+            this.mainDataGridView.Size = new System.Drawing.Size(727, 483);
             this.mainDataGridView.TabIndex = 1;
             // 
             // messageLabel
             // 
             this.messageLabel.AutoSize = true;
-            this.messageLabel.Location = new System.Drawing.Point(12, 589);
+            this.messageLabel.Location = new System.Drawing.Point(71, 589);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(0, 13);
+            this.messageLabel.Size = new System.Drawing.Size(10, 13);
             this.messageLabel.TabIndex = 2;
+            this.messageLabel.Text = "-";
             // 
             // saveChangesButton
             // 
@@ -213,7 +218,7 @@ namespace SqlServerApp
             this.databasesListBox.FormattingEnabled = true;
             this.databasesListBox.Location = new System.Drawing.Point(10, 33);
             this.databasesListBox.Name = "databasesListBox";
-            this.databasesListBox.Size = new System.Drawing.Size(160, 537);
+            this.databasesListBox.Size = new System.Drawing.Size(160, 550);
             this.databasesListBox.TabIndex = 6;
             // 
             // tabControl
@@ -224,18 +229,21 @@ namespace SqlServerApp
             this.tabControl.Location = new System.Drawing.Point(342, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(741, 558);
+            this.tabControl.Size = new System.Drawing.Size(741, 571);
             this.tabControl.TabIndex = 7;
             // 
             // dataTabPage
             // 
+            this.dataTabPage.Controls.Add(this.label1);
+            this.dataTabPage.Controls.Add(this.filterButton);
+            this.dataTabPage.Controls.Add(this.filterTextBox);
             this.dataTabPage.Controls.Add(this.mainDataGridView);
             this.dataTabPage.Controls.Add(this.bindingNavigator);
             this.dataTabPage.Controls.Add(this.saveChangesButton);
             this.dataTabPage.Location = new System.Drawing.Point(4, 22);
             this.dataTabPage.Name = "dataTabPage";
             this.dataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.dataTabPage.Size = new System.Drawing.Size(733, 532);
+            this.dataTabPage.Size = new System.Drawing.Size(733, 545);
             this.dataTabPage.TabIndex = 0;
             this.dataTabPage.Text = "Data";
             this.dataTabPage.UseVisualStyleBackColor = true;
@@ -259,11 +267,47 @@ namespace SqlServerApp
             this.reportTabPage.Text = "Report";
             this.reportTabPage.UseVisualStyleBackColor = true;
             // 
+            // filterTextBox
+            // 
+            this.filterTextBox.Location = new System.Drawing.Point(93, 520);
+            this.filterTextBox.Name = "filterTextBox";
+            this.filterTextBox.Size = new System.Drawing.Size(537, 20);
+            this.filterTextBox.TabIndex = 5;
+            // 
+            // filterButton
+            // 
+            this.filterButton.Location = new System.Drawing.Point(633, 518);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(97, 23);
+            this.filterButton.TabIndex = 6;
+            this.filterButton.Text = "Filter";
+            this.filterButton.UseVisualStyleBackColor = true;
+            this.filterButton.Click += new System.EventHandler(this.FilterButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 523);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Filter Conditions:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 589);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Message:";
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 611);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.databasesListBox);
             this.Controls.Add(this.messageLabel);
@@ -305,6 +349,10 @@ namespace SqlServerApp
         private System.Windows.Forms.TabPage dataTabPage;
         private System.Windows.Forms.TabPage structureTabPage;
         private System.Windows.Forms.TabPage reportTabPage;
+        private System.Windows.Forms.Button filterButton;
+        private System.Windows.Forms.TextBox filterTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

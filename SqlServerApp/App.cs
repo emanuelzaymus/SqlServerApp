@@ -28,13 +28,25 @@ namespace SqlServerApp
             bindingNavigator.BindingSource = _bindingSource;
         }
 
-        private void SelectedTableChanged(object sender, EventArgs e) => ReloadTable();
+        private void SelectedTableChanged(object sender, EventArgs e)
+        {
+            filterTextBox.Text = default;
+            ReloadTable();
+        }
 
         private void ReloadTable()
         {
-            var tableName = (string)tablesListBox.SelectedItem;
-            _bindingSource.DataSource = _controller.GetTable(tableName);
-            _bindingSource.DataMember = tableName;
+            try
+            {
+                var tableName = (string)tablesListBox.SelectedItem;
+                var dataSet = _controller.GetTable(tableName, filterTextBox.Text);
+                _bindingSource.DataSource = dataSet;
+                _bindingSource.DataMember = tableName;
+            }
+            catch (Exception e)
+            {
+                SetMessage(e.Message);
+            }
         }
 
         private void SaveChangesButton_Click(object sender, EventArgs e)
@@ -44,7 +56,11 @@ namespace SqlServerApp
             ReloadTable();
         }
 
-        private void SetMessage(string msg) => messageLabel.Text = msg;
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+            ReloadTable();
+        }
 
+        private void SetMessage(string msg) => messageLabel.Text = msg;
     }
 }
