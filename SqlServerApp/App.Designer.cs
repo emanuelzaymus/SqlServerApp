@@ -36,37 +36,44 @@ namespace SqlServerApp
             this.messageLabel = new System.Windows.Forms.Label();
             this.saveChangesButton = new System.Windows.Forms.Button();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.databasesListBox = new System.Windows.Forms.ListBox();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.dataTabPage = new System.Windows.Forms.TabPage();
+            this.structureTabPage = new System.Windows.Forms.TabPage();
+            this.reportTabPage = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.dataTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tablesListBox
             // 
             this.tablesListBox.FormattingEnabled = true;
-            this.tablesListBox.Location = new System.Drawing.Point(12, 38);
+            this.tablesListBox.Location = new System.Drawing.Point(176, 33);
             this.tablesListBox.Name = "tablesListBox";
-            this.tablesListBox.Size = new System.Drawing.Size(163, 524);
+            this.tablesListBox.Size = new System.Drawing.Size(160, 537);
             this.tablesListBox.TabIndex = 0;
             // 
             // mainDataGridView
             // 
             this.mainDataGridView.AllowUserToOrderColumns = true;
             this.mainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.mainDataGridView.Location = new System.Drawing.Point(181, 38);
+            this.mainDataGridView.Location = new System.Drawing.Point(3, 31);
             this.mainDataGridView.Name = "mainDataGridView";
-            this.mainDataGridView.Size = new System.Drawing.Size(902, 524);
+            this.mainDataGridView.Size = new System.Drawing.Size(727, 498);
             this.mainDataGridView.TabIndex = 1;
             // 
             // messageLabel
@@ -79,7 +86,7 @@ namespace SqlServerApp
             // 
             // saveChangesButton
             // 
-            this.saveChangesButton.Location = new System.Drawing.Point(989, 576);
+            this.saveChangesButton.Location = new System.Drawing.Point(636, 5);
             this.saveChangesButton.Name = "saveChangesButton";
             this.saveChangesButton.Size = new System.Drawing.Size(94, 23);
             this.saveChangesButton.TabIndex = 3;
@@ -92,6 +99,7 @@ namespace SqlServerApp
             this.bindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
             this.bindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator.Dock = System.Windows.Forms.DockStyle.None;
             this.bindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -104,16 +112,41 @@ namespace SqlServerApp
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigator.Location = new System.Drawing.Point(0, 0);
+            this.bindingNavigator.Location = new System.Drawing.Point(3, 3);
             this.bindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator.Name = "bindingNavigator";
             this.bindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator.Size = new System.Drawing.Size(1095, 25);
+            this.bindingNavigator.Size = new System.Drawing.Size(255, 25);
             this.bindingNavigator.TabIndex = 4;
             this.bindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -147,16 +180,9 @@ namespace SqlServerApp
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Current position";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -179,36 +205,68 @@ namespace SqlServerApp
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // bindingNavigatorAddNewItem
+            // databasesListBox
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.databasesListBox.FormattingEnabled = true;
+            this.databasesListBox.Location = new System.Drawing.Point(10, 33);
+            this.databasesListBox.Name = "databasesListBox";
+            this.databasesListBox.Size = new System.Drawing.Size(160, 537);
+            this.databasesListBox.TabIndex = 6;
             // 
-            // bindingNavigatorDeleteItem
+            // tabControl
             // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.tabControl.Controls.Add(this.dataTabPage);
+            this.tabControl.Controls.Add(this.structureTabPage);
+            this.tabControl.Controls.Add(this.reportTabPage);
+            this.tabControl.Location = new System.Drawing.Point(342, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(741, 558);
+            this.tabControl.TabIndex = 7;
+            // 
+            // dataTabPage
+            // 
+            this.dataTabPage.Controls.Add(this.mainDataGridView);
+            this.dataTabPage.Controls.Add(this.bindingNavigator);
+            this.dataTabPage.Controls.Add(this.saveChangesButton);
+            this.dataTabPage.Location = new System.Drawing.Point(4, 22);
+            this.dataTabPage.Name = "dataTabPage";
+            this.dataTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.dataTabPage.Size = new System.Drawing.Size(733, 532);
+            this.dataTabPage.TabIndex = 0;
+            this.dataTabPage.Text = "Data";
+            this.dataTabPage.UseVisualStyleBackColor = true;
+            // 
+            // structureTabPage
+            // 
+            this.structureTabPage.Location = new System.Drawing.Point(4, 22);
+            this.structureTabPage.Name = "structureTabPage";
+            this.structureTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.structureTabPage.Size = new System.Drawing.Size(748, 532);
+            this.structureTabPage.TabIndex = 1;
+            this.structureTabPage.Text = "Stucture";
+            this.structureTabPage.UseVisualStyleBackColor = true;
+            // 
+            // reportTabPage
+            // 
+            this.reportTabPage.Location = new System.Drawing.Point(4, 22);
+            this.reportTabPage.Name = "reportTabPage";
+            this.reportTabPage.Size = new System.Drawing.Size(748, 532);
+            this.reportTabPage.TabIndex = 2;
+            this.reportTabPage.Text = "Report";
+            this.reportTabPage.UseVisualStyleBackColor = true;
             // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 611);
-            this.Controls.Add(this.bindingNavigator);
-            this.Controls.Add(this.saveChangesButton);
+            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.databasesListBox);
             this.Controls.Add(this.messageLabel);
-            this.Controls.Add(this.mainDataGridView);
             this.Controls.Add(this.tablesListBox);
             this.Name = "App";
             this.Text = "Sql Server App";
@@ -216,6 +274,9 @@ namespace SqlServerApp
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
+            this.tabControl.ResumeLayout(false);
+            this.dataTabPage.ResumeLayout(false);
+            this.dataTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +300,11 @@ namespace SqlServerApp
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ListBox databasesListBox;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage dataTabPage;
+        private System.Windows.Forms.TabPage structureTabPage;
+        private System.Windows.Forms.TabPage reportTabPage;
     }
 }
 
