@@ -335,6 +335,7 @@ namespace SqlServerApp
             this.createDbButton.TabIndex = 12;
             this.createDbButton.Text = "Create Database";
             this.createDbButton.UseVisualStyleBackColor = true;
+            this.createDbButton.Click += new System.EventHandler(this.CreateDbButton_Click);
             // 
             // dropDbButton
             // 
@@ -344,6 +345,7 @@ namespace SqlServerApp
             this.dropDbButton.TabIndex = 13;
             this.dropDbButton.Text = "Drop Database";
             this.dropDbButton.UseVisualStyleBackColor = true;
+            this.dropDbButton.Click += new System.EventHandler(this.DropDbButton_Click);
             // 
             // createTableButton
             // 

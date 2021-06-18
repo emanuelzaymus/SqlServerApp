@@ -38,6 +38,20 @@ namespace SqlServerApp
             _connection.ChangeDatabase(databaseName);
         }
 
+        internal void CreateDatabase(string databaseName)
+        {
+            _command.CommandText = $"CREATE DATABASE {databaseName}";
+            
+            _command.ExecuteNonQuery();
+        }
+
+        internal void DropDatabase(string databaseName)
+        {
+            _command.CommandText = $"DROP DATABASE {databaseName}";
+            
+            _command.ExecuteNonQuery();
+        }
+
         internal IList<string> GetTableNames()
         {
             _command.CommandText = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
@@ -45,7 +59,7 @@ namespace SqlServerApp
             return _command.ExecuteReader().GetAll().Select(r => (string)r["TABLE_NAME"]).ToList();
         }
 
-        internal void CreateNewTable()
+        internal void CreateTable()
         {
             _command.CommandText = "CREATE TABLE NewTable (Id int PRIMARY KEY)";
 

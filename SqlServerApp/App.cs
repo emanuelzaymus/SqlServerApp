@@ -16,10 +16,10 @@ namespace SqlServerApp
             InitializeComponent();
 
             _controller = CreateMainController();
-            RefreshDatabases();
+            ReloadDatabaseNames();
             databasesListBox.SelectedValueChanged += SelectedDatabaseChanged;
             databasesListBox.SelectedItem = _controller.CurrentDatabaseName;
-            RefreshTables();
+            ReloadTableNames();
             tablesListBox.SelectedValueChanged += SelectedTableChanged;
 
             mainDataGridView.DataSource = _bindingSource;
@@ -42,9 +42,9 @@ namespace SqlServerApp
             }
         }
 
-        private void RefreshDatabases() => databasesListBox.DataSource = _controller.GetDatabaseNames();
+        private void ReloadDatabaseNames() => databasesListBox.DataSource = _controller.GetDatabaseNames();
 
-        private void RefreshTables() => tablesListBox.DataSource = _controller.GetTableNames();
+        private void ReloadTableNames() => tablesListBox.DataSource = _controller.GetTableNames();
 
         private void SelectedDatabaseChanged(object sender, EventArgs e)
         {
@@ -61,6 +61,35 @@ namespace SqlServerApp
             }
         }
 
+        private void CreateDbButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _controller.CreateDatabase("Mojaaa");
+                ReloadDatabaseNames();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+                throw;
+            }
+        }
+
+        private void DropDbButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dbName = databasesListBox.SelectedItem.ToString();
+                _controller.DropDatabase(dbName);
+                ReloadDatabaseNames();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+                throw;
+            }
+        }
+
         private void SelectedTableChanged(object sender, EventArgs e)
         {
             filterTextBox.Text = default;
@@ -71,8 +100,8 @@ namespace SqlServerApp
         {
             try
             {
-                _controller.CreateNewTable();
-                RefreshTables();
+                _controller.CreateTable();
+                ReloadTableNames();
             }
             catch (Exception ex)
             {
@@ -86,7 +115,7 @@ namespace SqlServerApp
             {
                 var tableName = tablesListBox.SelectedItem.ToString();
                 _controller.DropTable(tableName);
-                RefreshTables();
+                ReloadTableNames();
             }
             catch (Exception ex)
             {
@@ -136,6 +165,11 @@ namespace SqlServerApp
         private void SetMessage(Exception ex)
         {
             messageLabel.Text = ex.Message.Replace("\r\n", " ");
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _controller.Dispose();
         }
 
     }
