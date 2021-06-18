@@ -363,6 +363,7 @@ namespace SqlServerApp
             this.dropTableButton.TabIndex = 15;
             this.dropTableButton.Text = "Drop Table";
             this.dropTableButton.UseVisualStyleBackColor = true;
+            this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
             // App
             // 

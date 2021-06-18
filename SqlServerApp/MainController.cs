@@ -52,6 +52,13 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
+        internal void DropTable(string tableName)
+        {
+            _command.CommandText = $"DROP TABLE {tableName}";
+
+            _command.ExecuteNonQuery();
+        }
+
         internal DataSet GetTable(string tableName, string filterConditions)
         {
             var ret = new DataSet();
@@ -80,5 +87,6 @@ namespace SqlServerApp
             _command.Dispose();
             _connection.Close();
         }
+
     }
 }

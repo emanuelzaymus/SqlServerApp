@@ -35,9 +35,9 @@ namespace SqlServerApp
                     var connectionString = ConnectionStringProvider.Provide();
                     return new MainController(connectionString);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Invalid Connection String." + e.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Invalid Connection String." + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace SqlServerApp
             }
             catch (Exception ex)
             {
-                SetMessage(ex.Message);
+                SetMessage(ex);
             }
         }
 
@@ -76,7 +76,21 @@ namespace SqlServerApp
             }
             catch (Exception ex)
             {
-                SetMessage(ex.Message);
+                SetMessage(ex);
+            }
+        }
+
+        private void DropTableButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var tableName = tablesListBox.SelectedItem.ToString();
+                _controller.DropTable(tableName);
+                RefreshTables();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
             }
         }
 
@@ -89,17 +103,24 @@ namespace SqlServerApp
                 _bindingSource.DataSource = dataSet;
                 _bindingSource.DataMember = tableName;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                SetMessage(e.Message);
+                SetMessage(ex);
             }
         }
 
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
-            int rowsAffected = _controller.SaveChanges((DataSet)_bindingSource.DataSource);
-            SetMessage("Rows affected: " + rowsAffected);
-            ReloadTable();
+            try
+            {
+                int rowsAffected = _controller.SaveChanges((DataSet)_bindingSource.DataSource);
+                SetMessage("Rows affected: " + rowsAffected);
+                ReloadTable();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
         }
 
         private void FilterButton_Click(object sender, EventArgs e)
@@ -110,6 +131,11 @@ namespace SqlServerApp
         private void SetMessage(string msg)
         {
             messageLabel.Text = msg;
+        }
+
+        private void SetMessage(Exception ex)
+        {
+            messageLabel.Text = ex.Message.Replace("\r\n", " ");
         }
 
     }
