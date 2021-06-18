@@ -69,6 +69,7 @@ namespace SqlServerApp
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.connectionStringTextBox);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConnectionForm";
