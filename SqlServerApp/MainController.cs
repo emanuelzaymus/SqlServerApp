@@ -45,11 +45,11 @@ namespace SqlServerApp
             return _command.ExecuteReader().GetAll().Select(r => (string)r["TABLE_NAME"]).ToList();
         }
 
-        internal int CreateNewTable()
+        internal void CreateNewTable()
         {
-            _command.CommandText = "CREATE TABLE NewTable (NewColumn int)";
+            _command.CommandText = "CREATE TABLE NewTable (Id int PRIMARY KEY)";
 
-            return _command.ExecuteNonQuery();
+            _command.ExecuteNonQuery();
         }
 
         internal DataSet GetTable(string tableName, string filterConditions)

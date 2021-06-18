@@ -69,9 +69,15 @@ namespace SqlServerApp
 
         private void CreateTableButton_Click(object sender, EventArgs e)
         {
-            var rowsAffected = _controller.CreateNewTable();
-            SetMessage("Rows affected: " + rowsAffected);
-            RefreshTables();
+            try
+            {
+                _controller.CreateNewTable();
+                RefreshTables();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex.Message);
+            }
         }
 
         private void ReloadTable()
