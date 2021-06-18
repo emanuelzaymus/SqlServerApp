@@ -23,13 +23,17 @@ namespace SqlServerApp
             ReloadTableNames();
             tablesListBox.SelectedValueChanged += SelectedTableChanged;
 
+            columnsListBox.SelectedValueChanged += SelectedColumnChanged;
+
             mainDataGridView.DataSource = _bindingSource;
             bindingNavigator.BindingSource = _bindingSource;
         }
 
+        private string SelectedDatabaseName => databasesListBox.SelectedItem.ToString();
+
         private string SelectedTableName => tablesListBox.SelectedItem.ToString();
 
-        private string SelectedDatabaseName => databasesListBox.SelectedItem.ToString();
+        private string SelectedColumnName => columnsListBox.SelectedItem.ToString();
 
         private MainController CreateMainController()
         {
@@ -173,6 +177,26 @@ namespace SqlServerApp
             catch (Exception ex)
             {
                 SetMessage(ex);
+            }
+        }
+
+        private void SelectedColumnChanged(object sender, EventArgs e)
+        {
+            columnNameTextBox.Text = SelectedColumnName;
+        }
+
+        private void AlterColumnButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var newColumnName = columnNameTextBox.Text;
+                _controller.AlterColumn(SelectedTableName, SelectedColumnName, newColumnName);
+                ReloadTableData();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+                throw;
             }
         }
 

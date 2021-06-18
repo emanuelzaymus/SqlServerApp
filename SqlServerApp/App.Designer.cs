@@ -63,7 +63,7 @@ namespace SqlServerApp
             this.addColumnButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.columnNameTextBox = new System.Windows.Forms.TextBox();
             this.alterColumnButton = new System.Windows.Forms.Button();
             this.columnsListBox = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -311,7 +311,7 @@ namespace SqlServerApp
             this.structureTabPage.Controls.Add(this.addColumnButton);
             this.structureTabPage.Controls.Add(this.button1);
             this.structureTabPage.Controls.Add(this.label7);
-            this.structureTabPage.Controls.Add(this.textBox2);
+            this.structureTabPage.Controls.Add(this.columnNameTextBox);
             this.structureTabPage.Controls.Add(this.alterColumnButton);
             this.structureTabPage.Controls.Add(this.columnsListBox);
             this.structureTabPage.Controls.Add(this.label6);
@@ -409,12 +409,12 @@ namespace SqlServerApp
             this.label7.TabIndex = 7;
             this.label7.Text = "Column Name";
             // 
-            // textBox2
+            // columnNameTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(10, 306);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(217, 20);
-            this.textBox2.TabIndex = 6;
+            this.columnNameTextBox.Location = new System.Drawing.Point(10, 306);
+            this.columnNameTextBox.Name = "columnNameTextBox";
+            this.columnNameTextBox.Size = new System.Drawing.Size(217, 20);
+            this.columnNameTextBox.TabIndex = 6;
             // 
             // alterColumnButton
             // 
@@ -424,6 +424,7 @@ namespace SqlServerApp
             this.alterColumnButton.TabIndex = 5;
             this.alterColumnButton.Text = "Alter Column";
             this.alterColumnButton.UseVisualStyleBackColor = true;
+            this.alterColumnButton.Click += new System.EventHandler(this.AlterColumnButton_Click);
             // 
             // columnsListBox
             // 
@@ -632,7 +633,7 @@ namespace SqlServerApp
         private System.Windows.Forms.Button addColumnButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox columnNameTextBox;
         private System.Windows.Forms.Button alterColumnButton;
         private System.Windows.Forms.ListBox columnsListBox;
         private System.Windows.Forms.Label label6;

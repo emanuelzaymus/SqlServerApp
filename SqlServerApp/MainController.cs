@@ -103,6 +103,14 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
+        internal void AlterColumn(string tableName, string columnName, string newColumnName)
+        {
+            // TODO: ONLY RENAMING !!!
+            _command.CommandText = $"sp_rename '{tableName}.{columnName}', '{newColumnName}', 'COLUMN'";
+
+            _command.ExecuteNonQuery();
+        }
+
         public void Dispose()
         {
             _dataAdapter.Dispose();
