@@ -41,7 +41,7 @@ namespace SqlServerApp
         internal void CreateDatabase(string databaseName)
         {
             _command.CommandText = $"CREATE DATABASE {databaseName}";
-            
+
             _command.ExecuteNonQuery();
         }
 
@@ -49,7 +49,7 @@ namespace SqlServerApp
         {
             ChangeDatabase("master");
             _command.CommandText = $"DROP DATABASE {databaseName}";
-            
+
             _command.ExecuteNonQuery();
         }
 
@@ -74,7 +74,7 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
-        internal DataSet GetTable(string tableName, string filterConditions)
+        internal DataSet GetTableData(string tableName, string filterConditions)
         {
             var ret = new DataSet();
 
@@ -94,6 +94,13 @@ namespace SqlServerApp
         internal int SaveChanges(DataSet dataSet)
         {
             return _dataAdapter.Update(dataSet, dataSet.Tables[0].TableName);
+        }
+
+        internal void RenameTable(string tableName, string newTableName)
+        {
+            _command.CommandText = $"sp_rename '{tableName}', '{newTableName}'";
+
+            _command.ExecuteNonQuery();
         }
 
         public void Dispose()

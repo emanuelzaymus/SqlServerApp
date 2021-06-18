@@ -26,6 +26,10 @@ namespace SqlServerApp
             bindingNavigator.BindingSource = _bindingSource;
         }
 
+        private string SelectedTableName => tablesListBox.SelectedItem.ToString();
+
+        private string SelectedDatabaseName => databasesListBox.SelectedItem.ToString();
+
         private MainController CreateMainController()
         {
             while (true)
@@ -50,8 +54,7 @@ namespace SqlServerApp
         {
             try
             {
-                var dbName = databasesListBox.SelectedItem.ToString();
-                _controller.ChangeDatabase(dbName);
+                _controller.ChangeDatabase(SelectedDatabaseName);
 
                 tablesListBox.DataSource = _controller.GetTableNames();
             }
@@ -79,8 +82,7 @@ namespace SqlServerApp
         {
             try
             {
-                var dbName = databasesListBox.SelectedItem.ToString();
-                _controller.DropDatabase(dbName);
+                _controller.DropDatabase(SelectedDatabaseName);
                 ReloadDatabaseNames();
             }
             catch (Exception ex)
@@ -92,7 +94,8 @@ namespace SqlServerApp
         private void SelectedTableChanged(object sender, EventArgs e)
         {
             filterTextBox.Text = default;
-            ReloadTable();
+            ReloadTableData();
+            tableNameTextBox.Text = SelectedTableName;
         }
 
         private void CreateTableButton_Click(object sender, EventArgs e)
@@ -112,8 +115,7 @@ namespace SqlServerApp
         {
             try
             {
-                var tableName = tablesListBox.SelectedItem.ToString();
-                _controller.DropTable(tableName);
+                _controller.DropTable(SelectedTableName);
                 ReloadTableNames();
             }
             catch (Exception ex)
@@ -122,14 +124,13 @@ namespace SqlServerApp
             }
         }
 
-        private void ReloadTable()
+        private void ReloadTableData()
         {
             try
             {
-                var tableName = tablesListBox.SelectedItem.ToString();
-                var dataSet = _controller.GetTable(tableName, filterTextBox.Text);
+                var dataSet = _controller.GetTableData(SelectedTableName, filterTextBox.Text);
                 _bindingSource.DataSource = dataSet;
-                _bindingSource.DataMember = tableName;
+                _bindingSource.DataMember = SelectedTableName;
             }
             catch (Exception ex)
             {
@@ -143,7 +144,7 @@ namespace SqlServerApp
             {
                 int rowsAffected = _controller.SaveChanges((DataSet)_bindingSource.DataSource);
                 SetMessage("Rows affected: " + rowsAffected);
-                ReloadTable();
+                ReloadTableData();
             }
             catch (Exception ex)
             {
@@ -153,7 +154,21 @@ namespace SqlServerApp
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            ReloadTable();
+            ReloadTableData();
+        }
+
+        private void RenameTableButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var newTableName = tableNameTextBox.Text;
+                _controller.RenameTable(SelectedTableName, newTableName);
+                ReloadTableNames();
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
         }
 
         private void SetMessage(string msg)
