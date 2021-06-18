@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SqlServerApp
 {
@@ -131,6 +132,10 @@ namespace SqlServerApp
                 var dataSet = _controller.GetTableData(SelectedTableName, filterTextBox.Text);
                 _bindingSource.DataSource = dataSet;
                 _bindingSource.DataMember = SelectedTableName;
+
+                // Update Table Structure => table columns list box
+                var columnNames = dataSet.Tables[SelectedTableName].Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
+                columnsListBox.DataSource = columnNames;
             }
             catch (Exception ex)
             {
