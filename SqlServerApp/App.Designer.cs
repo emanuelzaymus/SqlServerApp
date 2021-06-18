@@ -383,6 +383,8 @@ namespace SqlServerApp
             this.Controls.Add(this.databasesListBox);
             this.Controls.Add(this.messageLabel);
             this.Controls.Add(this.tablesListBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "App";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sql Server App";

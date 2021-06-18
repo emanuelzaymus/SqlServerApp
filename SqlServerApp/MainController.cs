@@ -47,6 +47,7 @@ namespace SqlServerApp
 
         internal void DropDatabase(string databaseName)
         {
+            ChangeDatabase("master");
             _command.CommandText = $"DROP DATABASE {databaseName}";
             
             _command.ExecuteNonQuery();

@@ -65,13 +65,13 @@ namespace SqlServerApp
         {
             try
             {
-                _controller.CreateDatabase("Mojaaa");
+                var dbName = UserInput.Request("New database name", "New Database");
+                _controller.CreateDatabase(dbName);
                 ReloadDatabaseNames();
             }
             catch (Exception ex)
             {
                 SetMessage(ex);
-                throw;
             }
         }
 
@@ -86,7 +86,6 @@ namespace SqlServerApp
             catch (Exception ex)
             {
                 SetMessage(ex);
-                throw;
             }
         }
 
