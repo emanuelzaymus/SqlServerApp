@@ -91,6 +91,13 @@ namespace SqlServerApp
             return ret;
         }
 
+        internal List<ColumnInfo> GetColumnInfos(string tableName)
+        {
+            _command.CommandText = $"SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = '{tableName}'";
+
+            return _command.ExecuteReader().GetAll().Select(r => new ColumnInfo((string)r[0], (string)r[1], (string)r[2] == "YES")).ToList();
+        }
+
         internal int SaveChanges(DataSet dataSet)
         {
             return _dataAdapter.Update(dataSet, dataSet.Tables[0].TableName);
@@ -103,9 +110,8 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
-        internal void AlterColumn(string tableName, string columnName, string newColumnName)
+        internal void RenameColumn(string tableName, string columnName, string newColumnName)
         {
-            // TODO: ONLY RENAMING !!!
             _command.CommandText = $"sp_rename '{tableName}.{columnName}', '{newColumnName}', 'COLUMN'";
 
             _command.ExecuteNonQuery();

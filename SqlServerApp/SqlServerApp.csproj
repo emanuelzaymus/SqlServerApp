@@ -53,6 +53,7 @@
     <Compile Include="App.Designer.cs">
       <DependentUpon>App.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColumnInfo.cs" />
     <Compile Include="ConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +61,7 @@
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionStringProvider.cs" />
+    <Compile Include="DataTypes.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

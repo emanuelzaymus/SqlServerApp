@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace SqlServerApp
 {
@@ -27,7 +28,23 @@ namespace SqlServerApp
 
             mainDataGridView.DataSource = _bindingSource;
             bindingNavigator.BindingSource = _bindingSource;
+
+            columnTypeComboBox.Items.AddRange(DataTypes.GetValues());
         }
+
+        private DataSet DataSet
+        {
+            get => (DataSet)_bindingSource.DataSource;
+            set
+            {
+                _bindingSource.DataSource = value;
+                _bindingSource.DataMember = SelectedTableName;
+            }
+        }
+
+        private DataTable DataTable => DataSet.Tables[SelectedTableName];
+
+        private List<ColumnInfo> _columnInfos;
 
         private string SelectedDatabaseName => databasesListBox.SelectedItem.ToString();
 
@@ -61,7 +78,7 @@ namespace SqlServerApp
             {
                 _controller.ChangeDatabase(SelectedDatabaseName);
 
-                tablesListBox.DataSource = _controller.GetTableNames();
+                ReloadTableNames();
             }
             catch (Exception ex)
             {
@@ -75,6 +92,7 @@ namespace SqlServerApp
             {
                 var dbName = UserInput.Request("New database name", "New Database");
                 _controller.CreateDatabase(dbName);
+
                 ReloadDatabaseNames();
             }
             catch (Exception ex)
@@ -100,6 +118,7 @@ namespace SqlServerApp
         {
             filterTextBox.Text = default;
             ReloadTableData();
+
             tableNameTextBox.Text = SelectedTableName;
         }
 
@@ -133,17 +152,15 @@ namespace SqlServerApp
         {
             try
             {
-                var dataSet = _controller.GetTableData(SelectedTableName, filterTextBox.Text);
-                _bindingSource.DataSource = dataSet;
-                _bindingSource.DataMember = SelectedTableName;
+                DataSet = _controller.GetTableData(SelectedTableName, filterTextBox.Text);
 
-                // Update Table Structure => table columns list box
-                var columnNames = dataSet.Tables[SelectedTableName].Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
-                columnsListBox.DataSource = columnNames;
+                ReloadColumnNames();
+                ReloadColumnInfos();
             }
             catch (Exception ex)
             {
                 SetMessage(ex);
+                throw;
             }
         }
 
@@ -151,7 +168,7 @@ namespace SqlServerApp
         {
             try
             {
-                int rowsAffected = _controller.SaveChanges((DataSet)_bindingSource.DataSource);
+                int rowsAffected = _controller.SaveChanges(DataSet);
                 SetMessage("Rows affected: " + rowsAffected);
                 ReloadTableData();
             }
@@ -172,6 +189,7 @@ namespace SqlServerApp
             {
                 var newTableName = tableNameTextBox.Text;
                 _controller.RenameTable(SelectedTableName, newTableName);
+
                 ReloadTableNames();
             }
             catch (Exception ex)
@@ -180,17 +198,36 @@ namespace SqlServerApp
             }
         }
 
+        private void ReloadColumnNames()
+        {
+            var columnNames = DataTable.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
+            columnsListBox.DataSource = columnNames;
+        }
+
+        private void ReloadColumnInfos()
+        {
+            _columnInfos = _controller.GetColumnInfos(SelectedTableName);
+        }
+
         private void SelectedColumnChanged(object sender, EventArgs e)
         {
             columnNameTextBox.Text = SelectedColumnName;
+
+            ColumnInfo columnInfo = _columnInfos?.FirstOrDefault(c => c.ColumnName == SelectedColumnName);
+
+            columnTypeComboBox.SelectedItem = columnInfo?.DataType;
+            nullableCheckBox.Checked = columnInfo?.IsNullable ?? false;
+            autoIncrementCheckBox.Checked = columnInfo?.AutoIncrement ?? false;
         }
 
         private void AlterColumnButton_Click(object sender, EventArgs e)
         {
             try
             {
-                var newColumnName = columnNameTextBox.Text;
-                _controller.AlterColumn(SelectedTableName, SelectedColumnName, newColumnName);
+                AlterColumn();
+
+                RenameColumn();
+
                 ReloadTableData();
             }
             catch (Exception ex)
@@ -198,6 +235,17 @@ namespace SqlServerApp
                 SetMessage(ex);
                 throw;
             }
+        }
+
+        private void AlterColumn()
+        {
+
+        }
+
+        private void RenameColumn()
+        {
+            var newColumnName = columnNameTextBox.Text;
+            _controller.RenameColumn(SelectedTableName, SelectedColumnName, newColumnName);
         }
 
         private void SetMessage(string msg)
