@@ -230,6 +230,25 @@ namespace SqlServerApp
             autoIncrementCheckBox.Checked = columnInfo?.AutoIncrement ?? false;
         }
 
+        private void AddColumnButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var columnName = columnNameTextBox.Text;
+                var dataType = (string)columnTypeComboBox.SelectedItem;
+                var isNullable = nullableCheckBox.Checked;
+                _controller.AddColumn(SelectedTableName, columnName, dataType, isNullable);
+
+                ReloadTableData();
+
+                SetMessage("New column created successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
+        }
+
         private void AlterColumnButton_Click(object sender, EventArgs e)
         {
             try

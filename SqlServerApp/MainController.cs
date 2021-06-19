@@ -110,10 +110,16 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
+        internal void AddColumn(string tableName, string columnName, string dataType, bool isNullable)
+        {
+            _command.CommandText = $"ALTER TABLE {tableName} ADD {columnName} {dataType} {GetNullability(isNullable)}";
+
+            _command.ExecuteNonQuery();
+        }
+
         internal void AlterColumn(string tableName, string columnName, string newDataType, bool newIsNullable)
         {
-            var nullability = newIsNullable ? "NULL" : "NOT NULL";
-            _command.CommandText = $"ALTER TABLE {tableName} ALTER COLUMN {columnName} {newDataType} {nullability}";
+            _command.CommandText = $"ALTER TABLE {tableName} ALTER COLUMN {columnName} {newDataType} {GetNullability(newIsNullable)}";
 
             _command.ExecuteNonQuery();
         }
@@ -131,6 +137,8 @@ namespace SqlServerApp
             _command.Dispose();
             _connection.Close();
         }
+
+        private string GetNullability(bool isNullable) => isNullable ? "NULL" : "NOT NULL";
 
     }
 }

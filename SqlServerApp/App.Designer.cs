@@ -327,6 +327,7 @@ namespace SqlServerApp
             // 
             // columnTypeComboBox
             // 
+            this.columnTypeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.columnTypeComboBox.FormattingEnabled = true;
             this.columnTypeComboBox.Location = new System.Drawing.Point(10, 411);
             this.columnTypeComboBox.Name = "columnTypeComboBox";
@@ -397,6 +398,7 @@ namespace SqlServerApp
             this.addColumnButton.TabIndex = 9;
             this.addColumnButton.Text = "Add Column";
             this.addColumnButton.UseVisualStyleBackColor = true;
+            this.addColumnButton.Click += new System.EventHandler(this.AddColumnButton_Click);
             // 
             // dropColumnButton
             // 
