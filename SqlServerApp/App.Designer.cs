@@ -204,6 +204,7 @@ namespace SqlServerApp
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -408,6 +409,7 @@ namespace SqlServerApp
             this.dropColumnButton.TabIndex = 8;
             this.dropColumnButton.Text = "Drop Column";
             this.dropColumnButton.UseVisualStyleBackColor = true;
+            this.dropColumnButton.Click += new System.EventHandler(this.DropColumnButton_Click);
             // 
             // label7
             // 

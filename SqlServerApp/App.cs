@@ -156,6 +156,9 @@ namespace SqlServerApp
             }
         }
 
+        /// <summary>
+        /// Reload all.
+        /// </summary>
         private void ReloadTableData()
         {
             try
@@ -278,6 +281,22 @@ namespace SqlServerApp
         {
             var newColumnName = columnNameTextBox.Text;
             _controller.RenameColumn(SelectedTableName, SelectedColumnName, newColumnName);
+        }
+
+        private void DropColumnButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _controller.DropColumn(SelectedTableName, SelectedColumnName);
+
+                ReloadTableData();
+
+                SetMessage("Column dropped successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
         }
 
         private void SetMessage(string msg)

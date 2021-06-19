@@ -131,6 +131,13 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
+        internal void DropColumn(string tableName, string columnName)
+        {
+            _command.CommandText = $"ALTER TABLE {tableName} DROP COLUMN {columnName}";
+
+            _command.ExecuteNonQuery();
+        }
+
         public void Dispose()
         {
             _dataAdapter.Dispose();
