@@ -94,6 +94,8 @@ namespace SqlServerApp
                 _controller.CreateDatabase(dbName);
 
                 ReloadDatabaseNames();
+
+                SetMessage("New database created successfully.");
             }
             catch (Exception ex)
             {
@@ -107,6 +109,8 @@ namespace SqlServerApp
             {
                 _controller.DropDatabase(SelectedDatabaseName);
                 ReloadDatabaseNames();
+
+                SetMessage("Database dropped successfully.");
             }
             catch (Exception ex)
             {
@@ -128,6 +132,8 @@ namespace SqlServerApp
             {
                 _controller.CreateTable();
                 ReloadTableNames();
+
+                SetMessage("New table created successfully.");
             }
             catch (Exception ex)
             {
@@ -141,6 +147,8 @@ namespace SqlServerApp
             {
                 _controller.DropTable(SelectedTableName);
                 ReloadTableNames();
+
+                SetMessage("Table dropped successfully.");
             }
             catch (Exception ex)
             {
@@ -191,6 +199,8 @@ namespace SqlServerApp
                 _controller.RenameTable(SelectedTableName, newTableName);
 
                 ReloadTableNames();
+
+                SetMessage("Table renamed successfully.");
             }
             catch (Exception ex)
             {
@@ -229,6 +239,8 @@ namespace SqlServerApp
                 RenameColumn();
 
                 ReloadTableData();
+
+                SetMessage("Column altered successfully.");
             }
             catch (Exception ex)
             {

@@ -115,8 +115,6 @@ namespace SqlServerApp
             var nullability = newIsNullable ? "NULL" : "NOT NULL";
             _command.CommandText = $"ALTER TABLE {tableName} ALTER COLUMN {columnName} {newDataType} {nullability}";
 
-            Console.WriteLine(_command.CommandText);
-
             _command.ExecuteNonQuery();
         }
 
