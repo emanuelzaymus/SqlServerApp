@@ -110,6 +110,16 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
+        internal void AlterColumn(string tableName, string columnName, string newDataType, bool newIsNullable)
+        {
+            var nullability = newIsNullable ? "NULL" : "NOT NULL";
+            _command.CommandText = $"ALTER TABLE {tableName} ALTER COLUMN {columnName} {newDataType} {nullability}";
+
+            Console.WriteLine(_command.CommandText);
+
+            _command.ExecuteNonQuery();
+        }
+
         internal void RenameColumn(string tableName, string columnName, string newColumnName)
         {
             _command.CommandText = $"sp_rename '{tableName}.{columnName}', '{newColumnName}', 'COLUMN'";

@@ -233,13 +233,14 @@ namespace SqlServerApp
             catch (Exception ex)
             {
                 SetMessage(ex);
-                throw;
             }
         }
 
         private void AlterColumn()
         {
-
+            var newDataType = (string)columnTypeComboBox.SelectedItem;
+            var newIsNullable = nullableCheckBox.Checked;
+            _controller.AlterColumn(SelectedTableName, SelectedColumnName, newDataType, newIsNullable);
         }
 
         private void RenameColumn()
