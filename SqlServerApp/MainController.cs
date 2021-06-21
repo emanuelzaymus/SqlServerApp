@@ -152,9 +152,22 @@ namespace SqlServerApp
 
         internal void ChangePrimaryKey(string tableName, IEnumerable<string> columns)
         {
-            DropPkConstraint(tableName);
+            var transaction = _connection.BeginTransaction();
+            _command.Transaction = transaction;
+            
+            try
+            {
+                DropPkConstraint(tableName);
 
-            AddPkConstraint(tableName, columns);
+                AddPkConstraint(tableName, columns);
+
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public void Dispose()
@@ -193,7 +206,7 @@ namespace SqlServerApp
             _command.CommandText = $"SELECT constraint_name FROM information_schema.table_constraints " +
                 $"WHERE constraint_type = 'PRIMARY KEY' AND table_name = '{tableName}'";
 
-            return _command.ExecuteReader().GetString(0);
+            return _command.ExecuteReader().GetAll().Select(r => r.GetString(0)).Single();
         }
 
     }

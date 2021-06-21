@@ -329,7 +329,19 @@ namespace SqlServerApp
 
         private void ChangePkButton_Click(object sender, EventArgs e)
         {
+            var newPkColumns = pkCheckedListBox.CheckedItems.Cast<string>();
+            try
+            {
+                _controller.ChangePrimaryKey(SelectedTableName, newPkColumns);
 
+                SetMessage("Primary key changed successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
+
+            ReloadPrimaryKey();
         }
 
         private void SetMessage(string msg)
