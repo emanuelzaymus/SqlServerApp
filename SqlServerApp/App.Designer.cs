@@ -55,10 +55,20 @@ namespace SqlServerApp
             this.filterButton = new System.Windows.Forms.Button();
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.structureTabPage = new System.Windows.Forms.TabPage();
+            this.dropForeignKeyButton = new System.Windows.Forms.Button();
+            this.addForeignKeyButton = new System.Windows.Forms.Button();
+            this.foreignColumnComboBox = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.foreignTableComboBox = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.columnComboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.changePkButton = new System.Windows.Forms.Button();
+            this.pkCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.columnTypeComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.fksListBox = new System.Windows.Forms.ListBox();
             this.autoIncrementCheckBox = new System.Windows.Forms.CheckBox();
             this.nullableCheckBox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -80,8 +90,6 @@ namespace SqlServerApp
             this.dropDbButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
             this.dropTableButton = new System.Windows.Forms.Button();
-            this.pkCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.changePkButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -315,12 +323,20 @@ namespace SqlServerApp
             // 
             // structureTabPage
             // 
+            this.structureTabPage.Controls.Add(this.dropForeignKeyButton);
+            this.structureTabPage.Controls.Add(this.addForeignKeyButton);
+            this.structureTabPage.Controls.Add(this.foreignColumnComboBox);
+            this.structureTabPage.Controls.Add(this.label13);
+            this.structureTabPage.Controls.Add(this.foreignTableComboBox);
+            this.structureTabPage.Controls.Add(this.label12);
+            this.structureTabPage.Controls.Add(this.columnComboBox);
+            this.structureTabPage.Controls.Add(this.label11);
             this.structureTabPage.Controls.Add(this.changePkButton);
             this.structureTabPage.Controls.Add(this.pkCheckedListBox);
             this.structureTabPage.Controls.Add(this.label10);
             this.structureTabPage.Controls.Add(this.columnTypeComboBox);
             this.structureTabPage.Controls.Add(this.label9);
-            this.structureTabPage.Controls.Add(this.listBox2);
+            this.structureTabPage.Controls.Add(this.fksListBox);
             this.structureTabPage.Controls.Add(this.autoIncrementCheckBox);
             this.structureTabPage.Controls.Add(this.nullableCheckBox);
             this.structureTabPage.Controls.Add(this.label8);
@@ -341,6 +357,98 @@ namespace SqlServerApp
             this.structureTabPage.TabIndex = 1;
             this.structureTabPage.Text = "Table Stucture";
             this.structureTabPage.UseVisualStyleBackColor = true;
+            // 
+            // dropForeignKeyButton
+            // 
+            this.dropForeignKeyButton.Location = new System.Drawing.Point(456, 357);
+            this.dropForeignKeyButton.Name = "dropForeignKeyButton";
+            this.dropForeignKeyButton.Size = new System.Drawing.Size(271, 23);
+            this.dropForeignKeyButton.TabIndex = 30;
+            this.dropForeignKeyButton.Text = "Drop Foreign Key";
+            this.dropForeignKeyButton.UseVisualStyleBackColor = true;
+            this.dropForeignKeyButton.Click += new System.EventHandler(this.DropForeignKeyButton_Click);
+            // 
+            // addForeignKeyButton
+            // 
+            this.addForeignKeyButton.Location = new System.Drawing.Point(456, 516);
+            this.addForeignKeyButton.Name = "addForeignKeyButton";
+            this.addForeignKeyButton.Size = new System.Drawing.Size(271, 23);
+            this.addForeignKeyButton.TabIndex = 29;
+            this.addForeignKeyButton.Text = "Add Foreign Key";
+            this.addForeignKeyButton.UseVisualStyleBackColor = true;
+            this.addForeignKeyButton.Click += new System.EventHandler(this.AddForeignKeyButton_Click);
+            // 
+            // foreignColumnComboBox
+            // 
+            this.foreignColumnComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.foreignColumnComboBox.FormattingEnabled = true;
+            this.foreignColumnComboBox.Location = new System.Drawing.Point(456, 487);
+            this.foreignColumnComboBox.Name = "foreignColumnComboBox";
+            this.foreignColumnComboBox.Size = new System.Drawing.Size(271, 21);
+            this.foreignColumnComboBox.TabIndex = 28;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(456, 471);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 13);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "Foreign Column";
+            // 
+            // foreignTableComboBox
+            // 
+            this.foreignTableComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.foreignTableComboBox.FormattingEnabled = true;
+            this.foreignTableComboBox.Location = new System.Drawing.Point(456, 447);
+            this.foreignTableComboBox.Name = "foreignTableComboBox";
+            this.foreignTableComboBox.Size = new System.Drawing.Size(271, 21);
+            this.foreignTableComboBox.TabIndex = 26;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(456, 431);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(72, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Foreign Table";
+            // 
+            // columnComboBox
+            // 
+            this.columnComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.columnComboBox.FormattingEnabled = true;
+            this.columnComboBox.Location = new System.Drawing.Point(456, 407);
+            this.columnComboBox.Name = "columnComboBox";
+            this.columnComboBox.Size = new System.Drawing.Size(271, 21);
+            this.columnComboBox.TabIndex = 24;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(456, 391);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(73, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Column Name";
+            // 
+            // changePkButton
+            // 
+            this.changePkButton.Location = new System.Drawing.Point(233, 357);
+            this.changePkButton.Name = "changePkButton";
+            this.changePkButton.Size = new System.Drawing.Size(217, 23);
+            this.changePkButton.TabIndex = 21;
+            this.changePkButton.Text = "Change Primary Key";
+            this.changePkButton.UseVisualStyleBackColor = true;
+            this.changePkButton.Click += new System.EventHandler(this.ChangePkButton_Click);
+            // 
+            // pkCheckedListBox
+            // 
+            this.pkCheckedListBox.FormattingEnabled = true;
+            this.pkCheckedListBox.Location = new System.Drawing.Point(233, 62);
+            this.pkCheckedListBox.Name = "pkCheckedListBox";
+            this.pkCheckedListBox.Size = new System.Drawing.Size(217, 289);
+            this.pkCheckedListBox.TabIndex = 20;
             // 
             // label10
             // 
@@ -369,13 +477,13 @@ namespace SqlServerApp
             this.label9.TabIndex = 16;
             this.label9.Text = "Foreign Keys";
             // 
-            // listBox2
+            // fksListBox
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(456, 62);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(271, 290);
-            this.listBox2.TabIndex = 15;
+            this.fksListBox.FormattingEnabled = true;
+            this.fksListBox.Location = new System.Drawing.Point(456, 62);
+            this.fksListBox.Name = "fksListBox";
+            this.fksListBox.Size = new System.Drawing.Size(271, 290);
+            this.fksListBox.TabIndex = 15;
             // 
             // autoIncrementCheckBox
             // 
@@ -571,24 +679,6 @@ namespace SqlServerApp
             this.dropTableButton.UseVisualStyleBackColor = true;
             this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
-            // pkCheckedListBox
-            // 
-            this.pkCheckedListBox.FormattingEnabled = true;
-            this.pkCheckedListBox.Location = new System.Drawing.Point(233, 62);
-            this.pkCheckedListBox.Name = "pkCheckedListBox";
-            this.pkCheckedListBox.Size = new System.Drawing.Size(217, 289);
-            this.pkCheckedListBox.TabIndex = 20;
-            // 
-            // changePkButton
-            // 
-            this.changePkButton.Location = new System.Drawing.Point(323, 357);
-            this.changePkButton.Name = "changePkButton";
-            this.changePkButton.Size = new System.Drawing.Size(127, 23);
-            this.changePkButton.TabIndex = 21;
-            this.changePkButton.Text = "Change Primary Key";
-            this.changePkButton.UseVisualStyleBackColor = true;
-            this.changePkButton.Click += new System.EventHandler(this.ChangePkButton_Click);
-            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,7 +751,7 @@ namespace SqlServerApp
         private System.Windows.Forms.Button renameTableButton;
         private System.Windows.Forms.TextBox tableNameTextBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox fksListBox;
         private System.Windows.Forms.CheckBox autoIncrementCheckBox;
         private System.Windows.Forms.CheckBox nullableCheckBox;
         private System.Windows.Forms.Label label8;
@@ -677,6 +767,14 @@ namespace SqlServerApp
         private System.Windows.Forms.Button filterColumnsButton;
         private System.Windows.Forms.Button changePkButton;
         private System.Windows.Forms.CheckedListBox pkCheckedListBox;
+        private System.Windows.Forms.Button dropForeignKeyButton;
+        private System.Windows.Forms.Button addForeignKeyButton;
+        private System.Windows.Forms.ComboBox foreignColumnComboBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox foreignTableComboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox columnComboBox;
+        private System.Windows.Forms.Label label11;
     }
 }
 

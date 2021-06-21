@@ -25,6 +25,7 @@ namespace SqlServerApp
             tablesListBox.SelectedValueChanged += SelectedTableChanged;
 
             columnsListBox.SelectedValueChanged += SelectedColumnChanged;
+            foreignTableComboBox.SelectedValueChanged += SlectedForeignTableChanged;
 
             mainDataGridView.DataSource = _bindingSource;
             bindingNavigator.BindingSource = _bindingSource;
@@ -44,7 +45,7 @@ namespace SqlServerApp
 
         private DataTable DataTable => DataSet.Tables[SelectedTableName];
 
-        private List<ColumnInfo> _columnInfos;
+        private IEnumerable<ColumnInfo> _columnInfos;
 
         private string SelectedDatabaseName => databasesListBox.SelectedItem.ToString();
 
@@ -70,7 +71,12 @@ namespace SqlServerApp
 
         private void ReloadDatabaseNames() => databasesListBox.DataSource = _controller.GetDatabaseNames();
 
-        private void ReloadTableNames() => tablesListBox.DataSource = _controller.GetTableNames();
+        private void ReloadTableNames()
+        {
+            var tableNames = _controller.GetTableNames();
+            tablesListBox.DataSource = tableNames;
+            foreignTableComboBox.DataSource = tableNames.ToList();
+        }
 
         private void SelectedDatabaseChanged(object sender, EventArgs e)
         {
@@ -168,6 +174,7 @@ namespace SqlServerApp
                 ReloadColumnNames();
                 ReloadColumnInfos();
                 ReloadPrimaryKey();
+                ReloadForeignKeys();
             }
             catch (Exception ex)
             {
@@ -228,6 +235,7 @@ namespace SqlServerApp
         private void ReloadColumnNames()
         {
             columnsListBox.DataSource = DataTable.GetColumnNames();
+            columnComboBox.DataSource = DataTable.GetColumnNames();
         }
 
         private void ReloadColumnInfos()
@@ -342,6 +350,59 @@ namespace SqlServerApp
             }
 
             ReloadPrimaryKey();
+        }
+
+        private void ReloadForeignKeys()
+        {
+            fksListBox.Items.Clear();
+            var fks = _controller.GetForeignKeys(SelectedTableName).ToArray();
+            fksListBox.Items.AddRange(fks);
+        }
+
+        private void DropForeignKeyButton_Click(object sender, EventArgs e)
+        {
+            var fkData = (ForeignKeyData)fksListBox.SelectedItem;
+
+            try
+            {
+                _controller.DropFkConstraint(fkData.Table, fkData.ConstraintName);
+
+                ReloadForeignKeys();
+
+                SetMessage("Foreign key dropped successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
+        }
+
+        private void SlectedForeignTableChanged(object sender, EventArgs e)
+        {
+            var foreignTable = (string)foreignTableComboBox.SelectedItem;
+            var foreignColumns = _controller.GetPrimaryKey(foreignTable);
+
+            foreignColumnComboBox.DataSource = foreignColumns.ToList();
+        }
+
+        private void AddForeignKeyButton_Click(object sender, EventArgs e)
+        {
+            var column = (string)columnComboBox.SelectedItem;
+            var foreignTable = (string)foreignTableComboBox.SelectedItem;
+            var foreignColumn = (string)foreignColumnComboBox.SelectedItem;
+
+            try
+            {
+                _controller.AddForeignKey(SelectedTableName, column, foreignTable, foreignColumn);
+
+                ReloadForeignKeys();
+
+                SetMessage("Foreign key added successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
         }
 
         private void SetMessage(string msg)

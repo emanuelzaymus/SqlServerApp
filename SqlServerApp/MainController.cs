@@ -91,7 +91,7 @@ namespace SqlServerApp
             return ret;
         }
 
-        internal List<ColumnInfo> GetColumnInfos(string tableName)
+        internal IEnumerable<ColumnInfo> GetColumnInfos(string tableName)
         {
             _command.CommandText = $"SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = '{tableName}'";
 
@@ -154,7 +154,7 @@ namespace SqlServerApp
         {
             var transaction = _connection.BeginTransaction();
             _command.Transaction = transaction;
-            
+
             try
             {
                 DropPkConstraint(tableName);
@@ -168,6 +168,30 @@ namespace SqlServerApp
                 transaction.Rollback();
                 throw;
             }
+        }
+
+        internal IEnumerable<ForeignKeyData> GetForeignKeys(string tableName)
+        {
+            _command.CommandText = $"sp_fkeys @fktable_name = '{tableName}'";
+
+            var foreignKeys = _command.ExecuteReader().GetAll().Select(r => new ForeignKeyData(
+                (string)r["FKTABLE_NAME"], (string)r["FKCOLUMN_NAME"], (string)r["PKTABLE_NAME"], (string)r["PKCOLUMN_NAME"], (string)r["FK_NAME"]
+            ));
+
+            return foreignKeys;
+        }
+
+        internal void DropFkConstraint(string tableName, string fkConstraintName)
+        {
+            DropConstraint(tableName, fkConstraintName);
+        }
+
+        internal void AddForeignKey(string table, string column, string foreignTable, string foreignColumn)
+        {
+            _command.CommandText = $"ALTER TABLE {table} ADD FOREIGN KEY ({column})" +
+                $"REFERENCES {foreignTable} ({foreignColumn})";
+
+            _command.ExecuteNonQuery();
         }
 
         public void Dispose()
@@ -191,9 +215,8 @@ namespace SqlServerApp
             try
             {
                 var pkConstraint = GetPkConstraint(tableName);
-                _command.CommandText = $"ALTER TABLE {tableName} DROP CONSTRAINT {pkConstraint}";
 
-                _command.ExecuteNonQuery();
+                DropConstraint(tableName, pkConstraint);
             }
             catch (Exception ex)
             {
@@ -201,12 +224,19 @@ namespace SqlServerApp
             }
         }
 
+        private void DropConstraint(string tableName, string constraintName)
+        {
+            _command.CommandText = $"ALTER TABLE {tableName} DROP CONSTRAINT {constraintName}";
+
+            _command.ExecuteNonQuery();
+        }
+
         private string GetPkConstraint(string tableName)
         {
             _command.CommandText = $"SELECT constraint_name FROM information_schema.table_constraints " +
                 $"WHERE constraint_type = 'PRIMARY KEY' AND table_name = '{tableName}'";
 
-            return _command.ExecuteReader().GetAll().Select(r => r.GetString(0)).Single();
+            return _command.ExecuteScalar().ToString();
         }
 
     }
