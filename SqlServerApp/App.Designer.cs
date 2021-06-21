@@ -50,15 +50,16 @@ namespace SqlServerApp
             this.databasesListBox = new System.Windows.Forms.ListBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.dataTabPage = new System.Windows.Forms.TabPage();
+            this.filterColumnsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.filterButton = new System.Windows.Forms.Button();
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.structureTabPage = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.columnTypeComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.autoIncrementCheckBox = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.nullableCheckBox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.addColumnButton = new System.Windows.Forms.Button();
@@ -79,9 +80,8 @@ namespace SqlServerApp
             this.dropDbButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
             this.dropTableButton = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.filterColumnsButton = new System.Windows.Forms.Button();
+            this.pkCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.changePkButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -207,6 +207,7 @@ namespace SqlServerApp
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -276,6 +277,16 @@ namespace SqlServerApp
             this.dataTabPage.Text = "Table Data";
             this.dataTabPage.UseVisualStyleBackColor = true;
             // 
+            // filterColumnsButton
+            // 
+            this.filterColumnsButton.Location = new System.Drawing.Point(261, 5);
+            this.filterColumnsButton.Name = "filterColumnsButton";
+            this.filterColumnsButton.Size = new System.Drawing.Size(94, 23);
+            this.filterColumnsButton.TabIndex = 8;
+            this.filterColumnsButton.Text = "Filter Columns";
+            this.filterColumnsButton.UseVisualStyleBackColor = true;
+            this.filterColumnsButton.Click += new System.EventHandler(this.FilterColumnsButton_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -304,13 +315,13 @@ namespace SqlServerApp
             // 
             // structureTabPage
             // 
+            this.structureTabPage.Controls.Add(this.changePkButton);
+            this.structureTabPage.Controls.Add(this.pkCheckedListBox);
             this.structureTabPage.Controls.Add(this.label10);
-            this.structureTabPage.Controls.Add(this.listBox1);
             this.structureTabPage.Controls.Add(this.columnTypeComboBox);
             this.structureTabPage.Controls.Add(this.label9);
             this.structureTabPage.Controls.Add(this.listBox2);
             this.structureTabPage.Controls.Add(this.autoIncrementCheckBox);
-            this.structureTabPage.Controls.Add(this.checkBox2);
             this.structureTabPage.Controls.Add(this.nullableCheckBox);
             this.structureTabPage.Controls.Add(this.label8);
             this.structureTabPage.Controls.Add(this.addColumnButton);
@@ -331,6 +342,15 @@ namespace SqlServerApp
             this.structureTabPage.Text = "Table Stucture";
             this.structureTabPage.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(233, 46);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Primary Key";
+            // 
             // columnTypeComboBox
             // 
             this.columnTypeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -343,7 +363,7 @@ namespace SqlServerApp
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(483, 46);
+            this.label9.Location = new System.Drawing.Point(457, 46);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(68, 13);
             this.label9.TabIndex = 16;
@@ -352,9 +372,9 @@ namespace SqlServerApp
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(483, 62);
+            this.listBox2.Location = new System.Drawing.Point(456, 62);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(244, 290);
+            this.listBox2.Size = new System.Drawing.Size(271, 290);
             this.listBox2.TabIndex = 15;
             // 
             // autoIncrementCheckBox
@@ -366,16 +386,6 @@ namespace SqlServerApp
             this.autoIncrementCheckBox.TabIndex = 14;
             this.autoIncrementCheckBox.Text = "Auto-Increment";
             this.autoIncrementCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(375, 372);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(81, 17);
-            this.checkBox2.TabIndex = 13;
-            this.checkBox2.Text = "Primary Key";
-            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // nullableCheckBox
             // 
@@ -390,7 +400,7 @@ namespace SqlServerApp
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 395);
+            this.label8.Location = new System.Drawing.Point(9, 395);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 13);
             this.label8.TabIndex = 11;
@@ -419,7 +429,7 @@ namespace SqlServerApp
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 356);
+            this.label7.Location = new System.Drawing.Point(9, 355);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 13);
             this.label7.TabIndex = 7;
@@ -453,7 +463,7 @@ namespace SqlServerApp
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 46);
+            this.label6.Location = new System.Drawing.Point(9, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 3;
@@ -479,7 +489,7 @@ namespace SqlServerApp
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 7);
+            this.label5.Location = new System.Drawing.Point(9, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 0;
@@ -561,32 +571,23 @@ namespace SqlServerApp
             this.dropTableButton.UseVisualStyleBackColor = true;
             this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
-            // label10
+            // pkCheckedListBox
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(230, 46);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Primary Keys";
+            this.pkCheckedListBox.FormattingEnabled = true;
+            this.pkCheckedListBox.Location = new System.Drawing.Point(233, 62);
+            this.pkCheckedListBox.Name = "pkCheckedListBox";
+            this.pkCheckedListBox.Size = new System.Drawing.Size(217, 289);
+            this.pkCheckedListBox.TabIndex = 20;
             // 
-            // listBox1
+            // changePkButton
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(233, 62);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(244, 290);
-            this.listBox1.TabIndex = 18;
-            // 
-            // filterColumnsButton
-            // 
-            this.filterColumnsButton.Location = new System.Drawing.Point(261, 5);
-            this.filterColumnsButton.Name = "filterColumnsButton";
-            this.filterColumnsButton.Size = new System.Drawing.Size(94, 23);
-            this.filterColumnsButton.TabIndex = 8;
-            this.filterColumnsButton.Text = "Filter Columns";
-            this.filterColumnsButton.UseVisualStyleBackColor = true;
-            this.filterColumnsButton.Click += new System.EventHandler(this.FilterColumnsButton_Click);
+            this.changePkButton.Location = new System.Drawing.Point(323, 357);
+            this.changePkButton.Name = "changePkButton";
+            this.changePkButton.Size = new System.Drawing.Size(127, 23);
+            this.changePkButton.TabIndex = 21;
+            this.changePkButton.Text = "Change Primary Key";
+            this.changePkButton.UseVisualStyleBackColor = true;
+            this.changePkButton.Click += new System.EventHandler(this.ChangePkButton_Click);
             // 
             // App
             // 
@@ -662,7 +663,6 @@ namespace SqlServerApp
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.CheckBox autoIncrementCheckBox;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox nullableCheckBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button addColumnButton;
@@ -674,8 +674,9 @@ namespace SqlServerApp
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox columnTypeComboBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button filterColumnsButton;
+        private System.Windows.Forms.Button changePkButton;
+        private System.Windows.Forms.CheckedListBox pkCheckedListBox;
     }
 }
 

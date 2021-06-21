@@ -138,6 +138,25 @@ namespace SqlServerApp
             _command.ExecuteNonQuery();
         }
 
+        internal IEnumerable<string> GetPrimaryKey(string tableName)
+        {
+            _command.CommandText =
+                $"SELECT c.column_name FROM information_schema.table_constraints t " +
+                $"    JOIN information_schema.constraint_column_usage c " +
+                $"        ON c.constraint_name = t.constraint_name " +
+                $"    WHERE c.table_name = '{tableName}' " +
+                $"    AND t.constraint_type = 'PRIMARY KEY'";
+
+            return _command.ExecuteReader().GetAll().Select(r => r.GetString(0));
+        }
+
+        internal void ChangePrimaryKey(string tableName, IEnumerable<string> columns)
+        {
+            DropPkConstraint(tableName);
+
+            AddPkConstraint(tableName, columns);
+        }
+
         public void Dispose()
         {
             _dataAdapter.Dispose();
@@ -146,6 +165,36 @@ namespace SqlServerApp
         }
 
         private string GetNullability(bool isNullable) => isNullable ? "NULL" : "NOT NULL";
+
+        private void AddPkConstraint(string tableName, IEnumerable<string> columns)
+        {
+            _command.CommandText = $"ALTER TABLE {tableName} ADD PRIMARY KEY ({string.Join(", ", columns)})";
+
+            _command.ExecuteNonQuery();
+        }
+
+        private void DropPkConstraint(string tableName)
+        {
+            try
+            {
+                var pkConstraint = GetPkConstraint(tableName);
+                _command.CommandText = $"ALTER TABLE {tableName} DROP CONSTRAINT {pkConstraint}";
+
+                _command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        private string GetPkConstraint(string tableName)
+        {
+            _command.CommandText = $"SELECT constraint_name FROM information_schema.table_constraints " +
+                $"WHERE constraint_type = 'PRIMARY KEY' AND table_name = '{tableName}'";
+
+            return _command.ExecuteReader().GetString(0);
+        }
 
     }
 }

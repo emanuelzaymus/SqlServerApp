@@ -167,11 +167,12 @@ namespace SqlServerApp
 
                 ReloadColumnNames();
                 ReloadColumnInfos();
+                ReloadPrimaryKey();
             }
             catch (Exception ex)
             {
                 SetMessage(ex);
-                throw;
+                Console.WriteLine(ex);
             }
         }
 
@@ -309,6 +310,26 @@ namespace SqlServerApp
             {
                 SetMessage(ex);
             }
+        }
+
+        private void ReloadPrimaryKey()
+        {
+            pkCheckedListBox.Items.Clear();
+            var columns = DataTable.GetColumnNames().ToArray();
+            pkCheckedListBox.Items.AddRange(columns);
+
+            var pkColumns = _controller.GetPrimaryKey(SelectedTableName);
+
+            foreach (var col in pkColumns)
+            {
+                int i = Array.IndexOf(columns, col);
+                pkCheckedListBox.SetItemChecked(i, true);
+            }
+        }
+
+        private void ChangePkButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void SetMessage(string msg)
