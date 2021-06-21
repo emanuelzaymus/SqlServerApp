@@ -61,7 +61,14 @@
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionStringProvider.cs" />
+    <Compile Include="DataTableExtensions.cs" />
     <Compile Include="DataTypes.cs" />
+    <Compile Include="FilterColumnsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FilterColumnsForm.Designer.cs">
+      <DependentUpon>FilterColumnsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConnectionForm.resx">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilterColumnsForm.resx">
+      <DependentUpon>FilterColumnsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -175,6 +175,19 @@ namespace SqlServerApp
             }
         }
 
+        private void FilterColumnsButton_Click(object sender, EventArgs e)
+        {
+            string[] selectedColumns = FilterColumnsForm.Request(mainDataGridView.Columns);
+
+            if (selectedColumns != null)
+            {
+                foreach (DataGridViewColumn col in mainDataGridView.Columns)
+                {
+                    col.Visible = selectedColumns.Contains(col.Name);
+                }
+            }
+        }
+
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
             try
@@ -213,8 +226,7 @@ namespace SqlServerApp
 
         private void ReloadColumnNames()
         {
-            var columnNames = DataTable.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
-            columnsListBox.DataSource = columnNames;
+            columnsListBox.DataSource = DataTable.GetColumnNames();
         }
 
         private void ReloadColumnInfos()

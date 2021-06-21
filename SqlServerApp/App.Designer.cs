@@ -79,6 +79,9 @@ namespace SqlServerApp
             this.dropDbButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
             this.dropTableButton = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.filterColumnsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -204,7 +207,6 @@ namespace SqlServerApp
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -259,6 +261,7 @@ namespace SqlServerApp
             // 
             // dataTabPage
             // 
+            this.dataTabPage.Controls.Add(this.filterColumnsButton);
             this.dataTabPage.Controls.Add(this.label1);
             this.dataTabPage.Controls.Add(this.filterButton);
             this.dataTabPage.Controls.Add(this.filterTextBox);
@@ -301,6 +304,8 @@ namespace SqlServerApp
             // 
             // structureTabPage
             // 
+            this.structureTabPage.Controls.Add(this.label10);
+            this.structureTabPage.Controls.Add(this.listBox1);
             this.structureTabPage.Controls.Add(this.columnTypeComboBox);
             this.structureTabPage.Controls.Add(this.label9);
             this.structureTabPage.Controls.Add(this.listBox2);
@@ -338,7 +343,7 @@ namespace SqlServerApp
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(527, 46);
+            this.label9.Location = new System.Drawing.Point(483, 46);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(68, 13);
             this.label9.TabIndex = 16;
@@ -347,9 +352,9 @@ namespace SqlServerApp
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(510, 62);
+            this.listBox2.Location = new System.Drawing.Point(483, 62);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(217, 225);
+            this.listBox2.Size = new System.Drawing.Size(244, 290);
             this.listBox2.TabIndex = 15;
             // 
             // autoIncrementCheckBox
@@ -556,6 +561,33 @@ namespace SqlServerApp
             this.dropTableButton.UseVisualStyleBackColor = true;
             this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(230, 46);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Primary Keys";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(233, 62);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(244, 290);
+            this.listBox1.TabIndex = 18;
+            // 
+            // filterColumnsButton
+            // 
+            this.filterColumnsButton.Location = new System.Drawing.Point(261, 5);
+            this.filterColumnsButton.Name = "filterColumnsButton";
+            this.filterColumnsButton.Size = new System.Drawing.Size(94, 23);
+            this.filterColumnsButton.TabIndex = 8;
+            this.filterColumnsButton.Text = "Filter Columns";
+            this.filterColumnsButton.UseVisualStyleBackColor = true;
+            this.filterColumnsButton.Click += new System.EventHandler(this.FilterColumnsButton_Click);
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -641,6 +673,9 @@ namespace SqlServerApp
         private System.Windows.Forms.ListBox columnsListBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox columnTypeComboBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button filterColumnsButton;
     }
 }
 
