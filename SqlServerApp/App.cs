@@ -202,6 +202,39 @@ namespace SqlServerApp
             }
         }
 
+        private void CreateSavepointButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _controller.CreateSavepoint();
+
+                rollbackButton.Enabled = true;
+
+                SetMessage("Savepoint created successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
+        }
+
+        private void RollbackButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _controller.Rollback();
+
+                ReloadTableData();
+                rollbackButton.Enabled = false;
+
+                SetMessage("Rolled back successfully.");
+            }
+            catch (Exception ex)
+            {
+                SetMessage(ex);
+            }
+        }
+
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
             try

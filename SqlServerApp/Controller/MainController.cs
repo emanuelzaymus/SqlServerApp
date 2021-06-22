@@ -24,6 +24,8 @@ namespace SqlServerApp.Controller
 
             _command = _connection.CreateCommand();
             _dataAdapter = new SqlDataAdapter(_command);
+
+            _command.Transaction = _connection.BeginTransaction();
         }
 
         internal IList<string> GetDatabaseNames()
@@ -118,8 +120,27 @@ namespace SqlServerApp.Controller
             }
         }
 
+        internal void CreateSavepoint()
+        {
+            if (_command.Transaction != null)
+            {
+                _command.Transaction.Commit();
+            }
+
+            _command.Transaction = _connection.BeginTransaction();
+        }
+
+        internal void Rollback()
+        {
+            _command.Transaction.Rollback();
+        }
+
         internal int SaveChanges(DataSet dataSet)
         {
+            _dataAdapter.InsertCommand.Transaction = _command.Transaction;
+            _dataAdapter.UpdateCommand.Transaction = _command.Transaction;
+            _dataAdapter.DeleteCommand.Transaction = _command.Transaction;
+
             return _dataAdapter.Update(dataSet, dataSet.Tables[0].TableName);
         }
 

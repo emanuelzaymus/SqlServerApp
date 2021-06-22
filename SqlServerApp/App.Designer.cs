@@ -50,11 +50,15 @@ namespace SqlServerApp
             this.databasesListBox = new System.Windows.Forms.ListBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.dataTabPage = new System.Windows.Forms.TabPage();
+            this.rollbackButton = new System.Windows.Forms.Button();
+            this.createSavepointButton = new System.Windows.Forms.Button();
             this.filterColumnsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.filterButton = new System.Windows.Forms.Button();
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.structureTabPage = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.indexComboBox = new System.Windows.Forms.ComboBox();
             this.dropForeignKeyButton = new System.Windows.Forms.Button();
             this.addForeignKeyButton = new System.Windows.Forms.Button();
             this.foreignColumnComboBox = new System.Windows.Forms.ComboBox();
@@ -90,8 +94,6 @@ namespace SqlServerApp
             this.dropDbButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
             this.dropTableButton = new System.Windows.Forms.Button();
-            this.indexComboBox = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -272,6 +274,8 @@ namespace SqlServerApp
             // 
             // dataTabPage
             // 
+            this.dataTabPage.Controls.Add(this.rollbackButton);
+            this.dataTabPage.Controls.Add(this.createSavepointButton);
             this.dataTabPage.Controls.Add(this.filterColumnsButton);
             this.dataTabPage.Controls.Add(this.label1);
             this.dataTabPage.Controls.Add(this.filterButton);
@@ -286,6 +290,27 @@ namespace SqlServerApp
             this.dataTabPage.TabIndex = 0;
             this.dataTabPage.Text = "Table Data";
             this.dataTabPage.UseVisualStyleBackColor = true;
+            // 
+            // rollbackButton
+            // 
+            this.rollbackButton.Enabled = false;
+            this.rollbackButton.Location = new System.Drawing.Point(529, 5);
+            this.rollbackButton.Name = "rollbackButton";
+            this.rollbackButton.Size = new System.Drawing.Size(83, 23);
+            this.rollbackButton.TabIndex = 10;
+            this.rollbackButton.Text = "Rollback";
+            this.rollbackButton.UseVisualStyleBackColor = true;
+            this.rollbackButton.Click += new System.EventHandler(this.RollbackButton_Click);
+            // 
+            // createSavepointButton
+            // 
+            this.createSavepointButton.Location = new System.Drawing.Point(440, 5);
+            this.createSavepointButton.Name = "createSavepointButton";
+            this.createSavepointButton.Size = new System.Drawing.Size(83, 23);
+            this.createSavepointButton.TabIndex = 9;
+            this.createSavepointButton.Text = "Savepoint";
+            this.createSavepointButton.UseVisualStyleBackColor = true;
+            this.createSavepointButton.Click += new System.EventHandler(this.CreateSavepointButton_Click);
             // 
             // filterColumnsButton
             // 
@@ -361,6 +386,24 @@ namespace SqlServerApp
             this.structureTabPage.TabIndex = 1;
             this.structureTabPage.Text = "Table Stucture";
             this.structureTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 435);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(33, 13);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "Index";
+            // 
+            // indexComboBox
+            // 
+            this.indexComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.indexComboBox.FormattingEnabled = true;
+            this.indexComboBox.Location = new System.Drawing.Point(10, 451);
+            this.indexComboBox.Name = "indexComboBox";
+            this.indexComboBox.Size = new System.Drawing.Size(217, 21);
+            this.indexComboBox.TabIndex = 31;
             // 
             // dropForeignKeyButton
             // 
@@ -683,24 +726,6 @@ namespace SqlServerApp
             this.dropTableButton.UseVisualStyleBackColor = true;
             this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
-            // indexComboBox
-            // 
-            this.indexComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.indexComboBox.FormattingEnabled = true;
-            this.indexComboBox.Location = new System.Drawing.Point(10, 451);
-            this.indexComboBox.Name = "indexComboBox";
-            this.indexComboBox.Size = new System.Drawing.Size(217, 21);
-            this.indexComboBox.TabIndex = 31;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 435);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(33, 13);
-            this.label14.TabIndex = 32;
-            this.label14.Text = "Index";
-            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -799,6 +824,8 @@ namespace SqlServerApp
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox indexComboBox;
+        private System.Windows.Forms.Button rollbackButton;
+        private System.Windows.Forms.Button createSavepointButton;
     }
 }
 
