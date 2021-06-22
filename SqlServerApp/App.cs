@@ -31,6 +31,7 @@ namespace SqlServerApp
             bindingNavigator.BindingSource = _bindingSource;
 
             columnTypeComboBox.Items.AddRange(DataTypes.GetValues());
+            indexComboBox.Items.AddRange(Indexes.GetValues());
         }
 
         private DataSet DataSet
@@ -252,6 +253,8 @@ namespace SqlServerApp
             columnTypeComboBox.SelectedItem = columnInfo?.DataType;
             nullableCheckBox.Checked = columnInfo?.IsNullable ?? false;
             autoIncrementCheckBox.Checked = columnInfo?.AutoIncrement ?? false;
+
+            indexComboBox.SelectedItem = columnInfo?.IndexType;
         }
 
         private void AddColumnButton_Click(object sender, EventArgs e)
@@ -262,6 +265,9 @@ namespace SqlServerApp
                 var dataType = (string)columnTypeComboBox.SelectedItem;
                 var isNullable = nullableCheckBox.Checked;
                 _controller.AddColumn(SelectedTableName, columnName, dataType, isNullable);
+
+                var indexType = (string)indexComboBox.SelectedItem;
+                _controller.CreateIndex(SelectedTableName, columnName, indexType);
 
                 ReloadTableData();
 
@@ -277,6 +283,8 @@ namespace SqlServerApp
         {
             try
             {
+                AlterIndex();
+
                 AlterColumn();
 
                 RenameColumn();
@@ -289,6 +297,14 @@ namespace SqlServerApp
             {
                 SetMessage(ex);
             }
+        }
+
+        private void AlterIndex()
+        {
+            var indexType = (string)indexComboBox.SelectedItem;
+            var colInfo = _columnInfos.Single(c => c.ColumnName == SelectedColumnName);
+
+            _controller.AlterIndex(SelectedTableName, colInfo.ColumnName, colInfo.IndexName, indexType);
         }
 
         private void AlterColumn()
@@ -308,6 +324,9 @@ namespace SqlServerApp
         {
             try
             {
+                var colInfo = _columnInfos.Single(c => c.ColumnName == SelectedColumnName);
+                _controller.DropIndex(SelectedTableName, colInfo.IndexName);
+
                 _controller.DropColumn(SelectedTableName, SelectedColumnName);
 
                 ReloadTableData();

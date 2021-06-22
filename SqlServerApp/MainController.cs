@@ -95,7 +95,25 @@ namespace SqlServerApp
         {
             _command.CommandText = $"SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = '{tableName}'";
 
-            return _command.ExecuteReader().GetAll().Select(r => new ColumnInfo((string)r[0], (string)r[1], (string)r[2] == "YES")).ToList();
+            var columnInfos = _command.ExecuteReader().GetAll().Select(r => new ColumnInfo((string)r[0], (string)r[1], (string)r[2] == "YES")).ToList();
+
+            FillIndexInfo(tableName, columnInfos);
+
+            return columnInfos;
+        }
+
+        private void FillIndexInfo(string tableName, List<ColumnInfo> columnInfos)
+        {
+            _command.CommandText = $"sp_helpindex '{tableName}'";
+
+            foreach (var reader in _command.ExecuteReader().GetAll())
+            {
+                var indexKeys = (string)reader["index_keys"];
+                var indexName = (string)reader["index_name"];
+                var indexDesccription = (string)reader["index_description"];
+
+                columnInfos.First(c => indexKeys.Contains(c.ColumnName)).SetIndex(indexName, indexDesccription);
+            }
         }
 
         internal int SaveChanges(DataSet dataSet)
@@ -134,6 +152,36 @@ namespace SqlServerApp
         internal void DropColumn(string tableName, string columnName)
         {
             _command.CommandText = $"ALTER TABLE {tableName} DROP COLUMN {columnName}";
+
+            _command.ExecuteNonQuery();
+        }
+
+        internal void CreateIndex(string tableName, string columnName, string indexType)
+        {
+            if (indexType is null)
+            {
+                return;
+            }
+
+            _command.CommandText = $"CREATE {indexType} INDEX {columnName} ON {tableName} ({columnName})";
+
+            _command.ExecuteNonQuery();
+        }
+
+        internal void AlterIndex(string tableName, string columnName, string indexName, string indexType)
+        {
+            DropIndex(tableName, indexName);
+            CreateIndex(tableName, columnName, indexType);
+        }
+
+        internal void DropIndex(string tableName, string indexName)
+        {
+            if (indexName is null)
+            {
+                return;
+            }
+
+            _command.CommandText = $"DROP INDEX {indexName} ON {tableName}";
 
             _command.ExecuteNonQuery();
         }

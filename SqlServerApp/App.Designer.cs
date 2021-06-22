@@ -90,6 +90,8 @@ namespace SqlServerApp
             this.dropDbButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
             this.dropTableButton = new System.Windows.Forms.Button();
+            this.indexComboBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -323,6 +325,8 @@ namespace SqlServerApp
             // 
             // structureTabPage
             // 
+            this.structureTabPage.Controls.Add(this.label14);
+            this.structureTabPage.Controls.Add(this.indexComboBox);
             this.structureTabPage.Controls.Add(this.dropForeignKeyButton);
             this.structureTabPage.Controls.Add(this.addForeignKeyButton);
             this.structureTabPage.Controls.Add(this.foreignColumnComboBox);
@@ -488,7 +492,7 @@ namespace SqlServerApp
             // autoIncrementCheckBox
             // 
             this.autoIncrementCheckBox.AutoSize = true;
-            this.autoIncrementCheckBox.Location = new System.Drawing.Point(82, 438);
+            this.autoIncrementCheckBox.Location = new System.Drawing.Point(82, 478);
             this.autoIncrementCheckBox.Name = "autoIncrementCheckBox";
             this.autoIncrementCheckBox.Size = new System.Drawing.Size(98, 17);
             this.autoIncrementCheckBox.TabIndex = 14;
@@ -498,7 +502,7 @@ namespace SqlServerApp
             // nullableCheckBox
             // 
             this.nullableCheckBox.AutoSize = true;
-            this.nullableCheckBox.Location = new System.Drawing.Point(12, 438);
+            this.nullableCheckBox.Location = new System.Drawing.Point(12, 478);
             this.nullableCheckBox.Name = "nullableCheckBox";
             this.nullableCheckBox.Size = new System.Drawing.Size(64, 17);
             this.nullableCheckBox.TabIndex = 12;
@@ -516,21 +520,21 @@ namespace SqlServerApp
             // 
             // addColumnButton
             // 
-            this.addColumnButton.Location = new System.Drawing.Point(10, 458);
+            this.addColumnButton.Location = new System.Drawing.Point(10, 516);
             this.addColumnButton.Name = "addColumnButton";
-            this.addColumnButton.Size = new System.Drawing.Size(217, 23);
+            this.addColumnButton.Size = new System.Drawing.Size(68, 23);
             this.addColumnButton.TabIndex = 9;
-            this.addColumnButton.Text = "Add Column";
+            this.addColumnButton.Text = "Add";
             this.addColumnButton.UseVisualStyleBackColor = true;
             this.addColumnButton.Click += new System.EventHandler(this.AddColumnButton_Click);
             // 
             // dropColumnButton
             // 
-            this.dropColumnButton.Location = new System.Drawing.Point(10, 516);
+            this.dropColumnButton.Location = new System.Drawing.Point(158, 516);
             this.dropColumnButton.Name = "dropColumnButton";
-            this.dropColumnButton.Size = new System.Drawing.Size(217, 23);
+            this.dropColumnButton.Size = new System.Drawing.Size(69, 23);
             this.dropColumnButton.TabIndex = 8;
-            this.dropColumnButton.Text = "Drop Column";
+            this.dropColumnButton.Text = "Drop";
             this.dropColumnButton.UseVisualStyleBackColor = true;
             this.dropColumnButton.Click += new System.EventHandler(this.DropColumnButton_Click);
             // 
@@ -552,11 +556,11 @@ namespace SqlServerApp
             // 
             // alterColumnButton
             // 
-            this.alterColumnButton.Location = new System.Drawing.Point(10, 487);
+            this.alterColumnButton.Location = new System.Drawing.Point(84, 516);
             this.alterColumnButton.Name = "alterColumnButton";
-            this.alterColumnButton.Size = new System.Drawing.Size(217, 23);
+            this.alterColumnButton.Size = new System.Drawing.Size(68, 23);
             this.alterColumnButton.TabIndex = 5;
-            this.alterColumnButton.Text = "Alter Column";
+            this.alterColumnButton.Text = "Alter";
             this.alterColumnButton.UseVisualStyleBackColor = true;
             this.alterColumnButton.Click += new System.EventHandler(this.AlterColumnButton_Click);
             // 
@@ -679,6 +683,24 @@ namespace SqlServerApp
             this.dropTableButton.UseVisualStyleBackColor = true;
             this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
+            // indexComboBox
+            // 
+            this.indexComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.indexComboBox.FormattingEnabled = true;
+            this.indexComboBox.Location = new System.Drawing.Point(10, 451);
+            this.indexComboBox.Name = "indexComboBox";
+            this.indexComboBox.Size = new System.Drawing.Size(217, 21);
+            this.indexComboBox.TabIndex = 31;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 435);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(33, 13);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "Index";
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -775,6 +797,8 @@ namespace SqlServerApp
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox columnComboBox;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox indexComboBox;
     }
 }
 

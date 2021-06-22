@@ -70,6 +70,7 @@
       <DependentUpon>FilterColumnsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ForeignKeyData.cs" />
+    <Compile Include="Indexes.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
