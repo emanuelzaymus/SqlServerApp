@@ -94,6 +94,8 @@ namespace SqlServerApp
             this.dropDbButton = new System.Windows.Forms.Button();
             this.createTableButton = new System.Windows.Forms.Button();
             this.dropTableButton = new System.Windows.Forms.Button();
+            this.importTabPage = new System.Windows.Forms.TabPage();
+            this.exportTabPage = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -219,7 +221,6 @@ namespace SqlServerApp
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -266,6 +267,8 @@ namespace SqlServerApp
             this.tabControl.Controls.Add(this.dataTabPage);
             this.tabControl.Controls.Add(this.structureTabPage);
             this.tabControl.Controls.Add(this.reportTabPage);
+            this.tabControl.Controls.Add(this.importTabPage);
+            this.tabControl.Controls.Add(this.exportTabPage);
             this.tabControl.Location = new System.Drawing.Point(342, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -726,6 +729,26 @@ namespace SqlServerApp
             this.dropTableButton.UseVisualStyleBackColor = true;
             this.dropTableButton.Click += new System.EventHandler(this.DropTableButton_Click);
             // 
+            // importTabPage
+            // 
+            this.importTabPage.Location = new System.Drawing.Point(4, 22);
+            this.importTabPage.Name = "importTabPage";
+            this.importTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.importTabPage.Size = new System.Drawing.Size(733, 545);
+            this.importTabPage.TabIndex = 3;
+            this.importTabPage.Text = "Import Table";
+            this.importTabPage.UseVisualStyleBackColor = true;
+            // 
+            // exportTabPage
+            // 
+            this.exportTabPage.Location = new System.Drawing.Point(4, 22);
+            this.exportTabPage.Name = "exportTabPage";
+            this.exportTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.exportTabPage.Size = new System.Drawing.Size(733, 545);
+            this.exportTabPage.TabIndex = 4;
+            this.exportTabPage.Text = "Export Table";
+            this.exportTabPage.UseVisualStyleBackColor = true;
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -826,6 +849,8 @@ namespace SqlServerApp
         private System.Windows.Forms.ComboBox indexComboBox;
         private System.Windows.Forms.Button rollbackButton;
         private System.Windows.Forms.Button createSavepointButton;
+        private System.Windows.Forms.TabPage importTabPage;
+        private System.Windows.Forms.TabPage exportTabPage;
     }
 }
 
