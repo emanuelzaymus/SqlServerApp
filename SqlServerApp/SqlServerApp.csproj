@@ -53,28 +53,28 @@
     <Compile Include="App.Designer.cs">
       <DependentUpon>App.cs</DependentUpon>
     </Compile>
-    <Compile Include="ColumnInfo.cs" />
+    <Compile Include="Data\ColumnInfo.cs" />
     <Compile Include="ConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConnectionForm.Designer.cs">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionStringProvider.cs" />
-    <Compile Include="DataTableExtensions.cs" />
-    <Compile Include="DataTypes.cs" />
+    <Compile Include="Configuration\ConnectionStringProvider.cs" />
+    <Compile Include="Extensions\DataTableExtensions.cs" />
+    <Compile Include="SqlServerDb\DataTypes.cs" />
     <Compile Include="FilterColumnsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FilterColumnsForm.Designer.cs">
       <DependentUpon>FilterColumnsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ForeignKeyData.cs" />
-    <Compile Include="Indexes.cs" />
-    <Compile Include="MainController.cs" />
+    <Compile Include="Data\ForeignKeyData.cs" />
+    <Compile Include="SqlServerDb\Indexes.cs" />
+    <Compile Include="Controller\MainController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDataReaderExtensions.cs" />
+    <Compile Include="Extensions\SqlDataReaderExtensions.cs" />
     <Compile Include="UserInput.cs">
       <SubType>Form</SubType>
     </Compile>

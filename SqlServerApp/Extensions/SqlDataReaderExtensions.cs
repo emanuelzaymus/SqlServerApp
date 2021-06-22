@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace SqlServerApp
+namespace SqlServerApp.Extensions
 {
     public static class SqlDataReaderExtensions
     {

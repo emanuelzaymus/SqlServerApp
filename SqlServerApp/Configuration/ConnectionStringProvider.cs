@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace SqlServerApp
+namespace SqlServerApp.Configuration
 {
     class ConnectionStringProvider
     {

@@ -1,4 +1,6 @@
-﻿namespace SqlServerApp
+﻿using SqlServerApp.SqlServerDb;
+
+namespace SqlServerApp.Data
 {
     class ColumnInfo
     {

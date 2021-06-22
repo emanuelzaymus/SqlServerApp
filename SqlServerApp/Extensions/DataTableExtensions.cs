@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 
-namespace SqlServerApp
+namespace SqlServerApp.Extensions
 {
     public static class DataTableExtensions
     {

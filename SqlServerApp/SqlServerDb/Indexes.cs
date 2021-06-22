@@ -1,4 +1,4 @@
-﻿namespace SqlServerApp
+﻿namespace SqlServerApp.SqlServerDb
 {
     class Indexes
     {
@@ -18,12 +18,12 @@
             bool unique = indexDescription.Contains("unique");
 
             return clustered
-                ? (unique
+                ? unique
                     ? UniqueClustered
-                    : Clustered)
-                : (unique
+                    : Clustered
+                : unique
                     ? UniqueNonclustered
-                    : Nonclustered);
+                    : Nonclustered;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace SqlServerApp
+﻿namespace SqlServerApp.SqlServerDb
 {
     class DataTypes
     {
