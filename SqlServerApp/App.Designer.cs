@@ -538,6 +538,7 @@ namespace SqlServerApp
             // autoIncrementCheckBox
             // 
             this.autoIncrementCheckBox.AutoSize = true;
+            this.autoIncrementCheckBox.Enabled = false;
             this.autoIncrementCheckBox.Location = new System.Drawing.Point(82, 478);
             this.autoIncrementCheckBox.Name = "autoIncrementCheckBox";
             this.autoIncrementCheckBox.Size = new System.Drawing.Size(98, 17);
