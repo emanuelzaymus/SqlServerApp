@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SqlServerApp.Program" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.Controller.MainController" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gDgAAAgAAiALAgALBBIgAAwEAEAQYAAhABAAIFBABEA=</HashCode>
+      <FileName>Controller\MainController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SqlServerApp.App" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8QBUQaSA0TQxlJsQOSDkYCoyiANgBQYAoIggD0LjEqI=</HashCode>
+      <FileName>App.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.ConnectionForm" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAABAAACAAABAAAACAAAgSAAAIAAAAACAAAAAAAAA=</HashCode>
+      <FileName>ConnectionForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.FilterColumnsForm" Collapsed="true">
+    <Position X="5.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAEACAAAA0AIAAAAAAAAAAAA=</HashCode>
+      <FileName>FilterColumnsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.UserInput" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACEAQAkAIAAAAAAAAAAAg=</HashCode>
+      <FileName>UserInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.SqlServerDb.Indexes" Collapsed="true">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIBACAAAQAEAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>SqlServerDb\Indexes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.SqlServerDb.DataTypes" Collapsed="true">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAQEAAAIAAkAAgACAAAAKACAEAACDQBAEAACAAoASE=</HashCode>
+      <FileName>SqlServerDb\DataTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.Data.ForeignKeyData" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAIAAEAIBAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ForeignKeyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.Data.ColumnInfo" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAgAIAAAAAAAFAAAAAAAAAAAAAAgAAAAAAIAA=</HashCode>
+      <FileName>Data\ColumnInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SqlServerApp.Configuration.ConnectionStringProvider" Collapsed="true">
+    <Position X="1" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\ConnectionStringProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
