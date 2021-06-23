@@ -44,6 +44,11 @@ namespace SqlServerApp.Controller
 
         internal void CreateDatabase(string databaseName)
         {
+            if (_command.Transaction != null)
+            {
+                _command.Transaction.Commit();
+            }
+
             _command.CommandText = $"CREATE DATABASE {databaseName}";
 
             _command.ExecuteNonQuery();
