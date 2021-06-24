@@ -56,6 +56,11 @@ namespace SqlServerApp.Controller
 
         internal void DropDatabase(string databaseName)
         {
+            if (_command.Transaction != null)
+            {
+                _command.Transaction.Commit();
+            }
+
             ChangeDatabase("master");
             _command.CommandText = $"DROP DATABASE {databaseName}";
 
