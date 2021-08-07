@@ -22,3 +22,7 @@ Desktop application for management of Microsoft Sql Server Database.
 - Windows Forms
 - ADO.NET
 
+![img](https://github.com/emanuelzaymus/SqlServerApp/blob/master/img/SqlServerApp1.JPG)
+![img](https://github.com/emanuelzaymus/SqlServerApp/blob/master/img/SqlServerApp2.JPG)
+![img](https://github.com/emanuelzaymus/SqlServerApp/blob/master/img/SqlServerApp3.JPG)
+![img](https://github.com/emanuelzaymus/SqlServerApp/blob/master/img/SqlServerApp4.JPG)
